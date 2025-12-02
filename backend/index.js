@@ -10,7 +10,7 @@ let app =express();
 app.use(express.json())
 app.use(cookieParser())
 
-app.use("api/auth" , authRoutes)
+app.use("/api/auth" , authRoutes)
 
 
 const url = "mongodb+srv://CartVerse:F5LO7RxuQYsKGccc@cluster0.8dojk.mongodb.net/"
