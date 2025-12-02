@@ -29,7 +29,7 @@ export const registration = async (req, res) => {
       password: hashPassword,
     });
 
-    const token = genToken(user._id);  // no await needed
+    const token = genToken(user._id); // no await needed
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -43,4 +43,28 @@ export const registration = async (req, res) => {
     console.error("Registration error:", error);
     return res.status(500).json({ message: "Registration error" });
   }
+};
+
+export const login = async (req, res) => {
+  try {
+    let { email, password } = req.body;
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User is not Found" });
+    }
+    let isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect Password" });
+    }
+    const token = genToken(user._id); // no await needed
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(201).json(user);
+  } catch (error) {}
 };
