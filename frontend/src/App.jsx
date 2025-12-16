@@ -1,7 +1,9 @@
 import React from 'react'
-import Registration from './pages/Registration'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Registration from './pages/Registration'
+import { Route, Routes } from 'react-router-dom'
+
 
 export const App = () => {
   return (
