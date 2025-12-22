@@ -29,10 +29,11 @@ export const Registration = () => {
             <img src={google} alt="" className="w-7" />
             Registration with Google
           </div>
-          <div className="w-full h-5 flex items-center justify-center gap[10px] ">
-<div className="w-full ">
-
-</div>
+          <div className="w-full h-5 flex items-center justify-center gap-10">
+            <div className="w-full h-[20px] flex items-center justify-center gap-2.5">
+              <div className="w-[40%] h-[1px] bg-[#96969635]"></div>Or<div className="w-[40%] h-[1px] bg-[#96969635]"></div>
+             <div className="w-[90%] "></div>
+            </div>
           </div>
         </form>
       </div>
