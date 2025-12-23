@@ -1,5 +1,7 @@
 import React from "react";
 import Logo from "../assets/logo.png";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 export const Registration = () => {
@@ -24,21 +26,48 @@ export const Registration = () => {
 
       <div className="max-w-[600px] w-[90%] h-[500px] bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg  flex items-center justify-center">
         {/* Registration form can be added here */}
-        <form action="" className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 ">
+        <form
+          action=""
+          className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
+        >
           <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer">
             <img src={google} alt="" className="w-7" />
             Registration with Google
           </div>
           <div className="w-full h-5 flex items-center justify-center gap-10">
             <div className="w-full h-5 flex items-center justify-center gap-2.5">
-              <div className="w-[40%] h-px bg-[#96969635]"></div>Or<div className="w-[40%] h-px bg-[#96969635]"></div>
-             <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
-              <input type="text" placeholder="Username" className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold" required/>
-              <input type="text" placeholder="Email" className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold" required/>
-              <input type="text" placeholder="Password" className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold" required/>
-              <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">Create Account</button>
-              <p className="text-[14px] text-gray-400">Already have an account? <a href="/login" className="text-blue-500 hover:underline">Login</a></p>
-             </div>
+              <div className="w-[40%] h-px bg-[#96969635]"></div>Or
+              <div className="w-[40%] h-px bg-[#96969635]"></div>
+              <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Password"
+                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
+                  required
+                />
+                <MdOutlineRemoveRedEye />
+                <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
+                  Create Account
+                </button>
+                <p className="text-[14px] text-gray-400">
+                  Already have an account?{" "}
+                  <a href="/login" className="text-blue-500 hover:underline">
+                    Login
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </form>
