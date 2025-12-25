@@ -7,16 +7,16 @@ import { useNavigate } from "react-router-dom";
 export const Registration = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-screen h-screen bg-gradient-to-1 from-[#141414] to[#0c2025] text-[white] flex flex-col items-center justyfy-start">
+    <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
         className="w-full h-20 flex items-center justify-start px-[30px] gap-2.5 cursor-pointer "
         onClick={() => navigate("/")}
       >
         <img className="w-10" src={Logo} alt="" />
-        <h1 className="text-[22px] text-black font-sans">CartVerse</h1>
+        <h1 className="text-[22px] text-white font-sans">CartVerse</h1>
       </div>
       <div className="w-full h-[100px] flex items-center justify-center flex-col gap-2.5">
-        <span className="text-[25px] font-semibold text-black">
+        <span className="text-[25px] font-semibold text-white">
           Registration page
         </span>
         <span className="text-[16px] text-gray-400">
@@ -34,8 +34,8 @@ export const Registration = () => {
             <img src={google} alt="" className="w-7" />
             Registration with Google
           </div>
-          <div className="w-full h-5 flex items-center justify-center gap-10">
-            <div className="w-full h-5 flex items-center justify-center gap-2.5">
+          <div className="w-full flex  items-center justify-center gap-10">
+            <div className="w-full  flex flex-col items-center justify-center gap-2.5">
               <div className="w-[40%] h-px bg-[#96969635]"></div>Or
               <div className="w-[40%] h-px bg-[#96969635]"></div>
               <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
@@ -52,7 +52,7 @@ export const Registration = () => {
                   required
                 />
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
                   required
