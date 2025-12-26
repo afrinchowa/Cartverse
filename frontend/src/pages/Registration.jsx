@@ -1,10 +1,11 @@
 import React from "react";
 import Logo from "../assets/logo.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-
+import { IoEyeOffSharp } from "react-icons/io5";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 export const Registration = () => {
+  let [show,setShow]=React.useState(false);
   const navigate = useNavigate();
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
@@ -38,7 +39,7 @@ export const Registration = () => {
             <div className="w-full  flex flex-col items-center justify-center gap-2.5">
               <div className="w-[40%] h-px bg-[#96969635]"></div>Or
               <div className="w-[40%] h-px bg-[#96969635]"></div>
-              <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
+              <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] relative">
                 <input
                   type="text"
                   placeholder="Username"
@@ -52,12 +53,16 @@ export const Registration = () => {
                   required
                 />
                 <input
-                  type="password"
+                  type={show?"text":"password"}
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
                   required
                 />
-                <MdOutlineRemoveRedEye />
+                {show ? (
+                  <MdOutlineRemoveRedEye className="w-5 h-5 right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                ) : (
+                  <IoEyeOffSharp className="w-5 h-5 right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                )}
                 <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
                   Create Account
                 </button>
