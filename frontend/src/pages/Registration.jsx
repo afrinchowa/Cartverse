@@ -59,9 +59,9 @@ export const Registration = () => {
                   required
                 />
                 {show ? (
-                  <MdOutlineRemoveRedEye className="w-5 h-5 right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
                 ) : (
-                  <IoEyeOffSharp className="w-5 h-5 right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <IoEyeOffSharp className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
                 )}
                 <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
                   Create Account
