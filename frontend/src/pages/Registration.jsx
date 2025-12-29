@@ -6,6 +6,7 @@ import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 export const Registration = () => {
   let [show,setShow]=React.useState(false);
+  let {serverUrl} = React.useContext(authDataContext);
   const navigate = useNavigate();
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
