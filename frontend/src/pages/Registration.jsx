@@ -7,7 +7,30 @@ import { useNavigate } from "react-router-dom";
 export const Registration = () => {
   let [show,setShow]=React.useState(false);
   let {serverUrl} = React.useContext(authDataContext);
+  let [name,setName]=React.useState("");
+  let [email,setEmail]=React.useState("");
+  let [password,setPassword]=React.useState("");
   const navigate = useNavigate();
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const username = form[2].value;
+    const email = form[3].value;
+    const password = form[4].value;
+    const res = await fetch(`${serverUrl}/api/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      navigate("/login");
+    } else {
+      alert(data.message);
+    }
+  };
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
@@ -45,19 +68,19 @@ export const Registration = () => {
                   type="text"
                   placeholder="Username"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
+                  required onChange={(e)=>setName(e.target.value)} value={name}
                 />
                 <input
                   type="text"
                   placeholder="Email"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
+                  required onChange={(e)=>setEmail(e.target.value)} value={email}
                 />
                 <input
                   type={show?"text":"password"}
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
+                  required onChange={(e)=>setPassword(e.target.value)} value={password}
                 />
                 {show ? (
                   <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
