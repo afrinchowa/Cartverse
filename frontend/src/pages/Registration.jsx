@@ -4,31 +4,30 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoEyeOffSharp } from "react-icons/io5";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
+import { authDataContext } from "../context/AuthDataContext";
+import axios from "axios";
 export const Registration = () => {
-  let [show,setShow]=React.useState(false);
-  let {serverUrl} = React.useContext(authDataContext);
-  let [name,setName]=React.useState("");
-  let [email,setEmail]=React.useState("");
-  let [password,setPassword]=React.useState("");
+  let [show, setShow] = React.useState(false);
+  let { serverUrl } = React.useContext(authDataContext);
+  let [name, setName] = React.useState("");
+  let [email, setEmail] = React.useState("");
+  let [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   const handleSignup = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const username = form[2].value;
-    const email = form[3].value;
-    const password = form[4].value;
-    const res = await fetch(`${serverUrl}/api/users/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      navigate("/login");
-    } else {
-      alert(data.message);
+    try {
+      const result = await axios.post(
+        serverUrl + "/api/users/register",
+        {
+          username: name,
+          email: email,
+          password: password,
+        },
+        { withCredentials: true }
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
@@ -53,6 +52,7 @@ export const Registration = () => {
         {/* Registration form can be added here */}
         <form
           action=""
+          onSubmit={handleSignup}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
         >
           <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer">
@@ -68,24 +68,36 @@ export const Registration = () => {
                   type="text"
                   placeholder="Username"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required onChange={(e)=>setName(e.target.value)} value={name}
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                 />
                 <input
                   type="text"
                   placeholder="Email"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required onChange={(e)=>setEmail(e.target.value)} value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
                 <input
-                  type={show?"text":"password"}
+                  type={show ? "text" : "password"}
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required onChange={(e)=>setPassword(e.target.value)} value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
                 {show ? (
-                  <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <MdOutlineRemoveRedEye
+                    className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute "
+                    onClick={() => setShow((prev) => !prev)}
+                  />
                 ) : (
-                  <IoEyeOffSharp className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <IoEyeOffSharp
+                    className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute "
+                    onClick={() => setShow((prev) => !prev)}
+                  />
                 )}
                 <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
                   Create Account
