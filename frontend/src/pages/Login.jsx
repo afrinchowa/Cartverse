@@ -4,10 +4,33 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoEyeOffSharp } from "react-icons/io5";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
 let [show,setShow]=React.useState(false);
+  let [email, setEmail] = React.useState("");
+  let [password, setPassword] = React.useState("");
+  let {serverUrl} =React.useContext(authDataContext);
+
+
   const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post(
+        serverUrl + "/api/users/login",
+        {
+          email: email,
+          password: password,
+        },  
+        { withCredentials: true }
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
@@ -29,7 +52,7 @@ let [show,setShow]=React.useState(false);
       <div className="max-w-[600px] w-[90%] h-[500px] bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg  flex items-center justify-center">
         {/* Registration form can be added here */}
         <form
-          action=""
+          action="" onSubmit={handleLogin}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
         >
           <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer">
@@ -46,13 +69,13 @@ let [show,setShow]=React.useState(false);
                   type="text"
                   placeholder="Email"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
+                  required onChange={(e)=>setEmail(e.target.value)} value={email}
                 />
                 <input
                   type={show?"text":"password"}
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
+                  required onChange={(e)=>setPassword(e.target.value)} value={password}
                 />
                 {show ? (
                   <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
