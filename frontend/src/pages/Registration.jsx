@@ -6,6 +6,7 @@ import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 import { authDataContext } from "../context/AuthDataContext";
 import axios from "axios";
+import { auth, provider } from "../utils/Firebase";
 export const Registration = () => {
   let [show, setShow] = React.useState(false);
   let { serverUrl } = React.useContext(authDataContext);
@@ -30,6 +31,14 @@ export const Registration = () => {
       console.log(error);
     }
   };
+  const googleSignup =async()=>{
+try{
+const response=await signInWithPopup(auth ,provider);
+console.log(response);
+}catch(error){
+console.log(error);
+}
+  }
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
@@ -55,7 +64,7 @@ export const Registration = () => {
           onSubmit={handleSignup}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
         >
-          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer">
+          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer" onClick={googleSignup}>
             <img src={google} alt="" className="w-7" />
             Registration with Google
           </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 import Logo from "../assets/logo.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
