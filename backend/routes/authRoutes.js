@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { login, logOut, registration } from '../controller/authController.js'
+import { googleLogin, login, logOut, registration } from '../controller/authController.js'
 const authRoutes = express.Router()
 
 authRoutes.post("/registration",registration)
