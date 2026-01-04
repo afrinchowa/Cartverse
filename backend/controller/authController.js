@@ -81,3 +81,29 @@ try{
   return res.status(500).json({message:`LogOut error ${error}`})
 }
 }
+
+
+export const googleLogin = async(req,res)=>{
+  try{
+    const {name,email}=req.body;
+    let user=await User.findOne({email});
+    if(!user){
+      user=await User.create({
+        name,
+        email,
+       
+      });
+    }
+    const token = genToken(user._id); // no await needed
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+    return res.status(200).json({message:"Google login successful"})
+  }catch(error){
+    console.log("Google Login error:",error);
+    return res.status(500).json({message:`Google login error: ${error}`})
+  }
+}

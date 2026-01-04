@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 import Logo from "../assets/logo.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -34,7 +35,10 @@ export const Registration = () => {
   const googleSignup =async()=>{
 try{
 const response=await signInWithPopup(auth ,provider);
-console.log(response);
+let user = response.user
+let name = user.displayName;
+let email = user.email;
+
 }catch(error){
 console.log(error);
 }
