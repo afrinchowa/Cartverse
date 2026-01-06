@@ -1,27 +1,37 @@
-import React, { createContext } from 'react'
-// eslint-disable-next-line react-refresh/only-export-components
-export const authDataContext = createContext()
-function AuthContext({children}) {
-  let serverUrl = "http://localhost:5000"
-  let value = {
-    isAuthenticated: false,
-    user: null,
-    login: (userData) => {
-      value.isAuthenticated = true
-      value.user = userData
-    },
-    logout: () => {
-      value.isAuthenticated = false
-      value.user = null
-    }
-  }
-  return (
-    <div>
-        <authDataContext.Provider value={value}>
-            {children}
-        </authDataContext.Provider>
-    </div>
-  )
-}
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useState } from "react";
 
-export default AuthContext
+export const authDataContext = createContext(null);
+
+const AuthContext = ({ children }) => {
+  const serverUrl = "http://localhost:5000";
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  const value = {
+    serverUrl,
+    isAuthenticated,
+    user,
+    login,
+    logout,
+  };
+
+  return (
+    <authDataContext.Provider value={value}>
+      {children}
+    </authDataContext.Provider>
+  );
+};
+
+export default AuthContext;

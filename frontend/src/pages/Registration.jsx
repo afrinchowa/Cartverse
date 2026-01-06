@@ -5,136 +5,168 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoEyeOffSharp } from "react-icons/io5";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
-import { authDataContext } from "../context/AuthDataContext";
+
 import axios from "axios";
 import { auth, provider } from "../utils/Firebase";
-export const Registration = () => {
-  let [show, setShow] = React.useState(false);
-  let { serverUrl } = React.useContext(authDataContext);
-  let [name, setName] = React.useState("");
-  let [email, setEmail] = React.useState("");
-  let [password, setPassword] = React.useState("");
+import { signInWithPopup } from "firebase/auth";
+import { authDataContext } from "../context/AuthContext";
+
+const Registration = () => {
+  const [show, setShow] = React.useState(false);
+  const { serverUrl } = React.useContext(authDataContext);
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   const navigate = useNavigate();
+
+  // Normal signup
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       const result = await axios.post(
-        serverUrl + "/api/users/register",
+        `${serverUrl}/api/users/register`,
         {
-          username: name,
-          email: email,
-          password: password,
+          username: name.trim(),
+          email: email.trim(),
+          password,
         },
         { withCredentials: true }
       );
+
       console.log(result.data);
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
-  const googleSignup =async()=>{
-try{
-const response=await signInWithPopup(auth ,provider);
-let user = response.user
-let name = user.displayName;
-let email = user.email;
-const result =await axios.post(
-  serverUrl + "/api/auth/googleLogin",
-  {
-    name: name,
-    email: email,
-  },
-  { withCredentials: true }
-);
-console.log(result.data);
-}catch(error){
-console.log(error);
-}
-  }
+
+  // Google signup
+  const googleSignup = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+
+      const result = await axios.post(
+        `${serverUrl}/api/auth/googleLogin`,
+        {
+          name: user.displayName,
+          email: user.email,
+        },
+        { withCredentials: true }
+      );
+
+      console.log(result.data);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Google signup failed");
+    }
+  };
+
   return (
-    <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
+    <div className="w-screen h-screen bg-black text-white flex flex-col items-center">
+      {/* Header */}
       <div
-        className="w-full h-20 flex items-center justify-start px-[30px] gap-2.5 cursor-pointer "
+        className="w-full h-20 flex items-center px-8 gap-3 cursor-pointer"
         onClick={() => navigate("/")}
       >
-        <img className="w-10" src={Logo} alt="" />
-        <h1 className="text-[22px] text-white font-sans">CartVerse</h1>
-      </div>
-      <div className="w-full h-[100px] flex items-center justify-center flex-col gap-2.5">
-        <span className="text-[25px] font-semibold text-white">
-          Registration page
-        </span>
-        <span className="text-[16px] text-gray-400">
-          Welcome to CartVerse,Place your Order
-        </span>
+        <img className="w-10" src={Logo} alt="logo" />
+        <h1 className="text-2xl font-sans">CartVerse</h1>
       </div>
 
-      <div className="max-w-[600px] w-[90%] h-[500px] bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg  flex items-center justify-center">
-        {/* Registration form can be added here */}
+      {/* Title */}
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-semibold">Registration Page</h2>
+        <p className="text-gray-400">
+          Welcome to CartVerse, place your order
+        </p>
+      </div>
+
+      {/* Card */}
+      <div className="max-w-[600px] w-[90%] bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg flex justify-center">
         <form
-          action=""
           onSubmit={handleSignup}
-          className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
+          className="w-[90%] py-8 flex flex-col gap-5"
         >
-          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer" onClick={googleSignup}>
-            <img src={google} alt="" className="w-7" />
+          {/* Google signup */}
+          <button
+            type="button"
+            onClick={googleSignup}
+            className="w-full h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-3 hover:bg-[#42656ca0] transition"
+          >
+            <img src={google} alt="google" className="w-7" />
             Registration with Google
+          </button>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4 text-gray-400">
+            <div className="flex-1 h-px bg-gray-600" />
+            OR
+            <div className="flex-1 h-px bg-gray-600" />
           </div>
-          <div className="w-full flex  items-center justify-center gap-10">
-            <div className="w-full  flex flex-col items-center justify-center gap-2.5">
-              <div className="w-[40%] h-px bg-[#96969635]"></div>Or
-              <div className="w-[40%] h-px bg-[#96969635]"></div>
-              <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] relative">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                />
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-                <input
-                  type={show ? "text" : "password"}
-                  placeholder="Password"
-                  className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
-                {show ? (
-                  <MdOutlineRemoveRedEye
-                    className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute "
-                    onClick={() => setShow((prev) => !prev)}
-                  />
-                ) : (
-                  <IoEyeOffSharp
-                    className="w-5 h-5 bottom-[44%] right-[5%] cursor-pointer absolute "
-                    onClick={() => setShow((prev) => !prev)}
-                  />
-                )}
-                <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
-                  Create Account
-                </button>
-                <p className="text-[14px] text-gray-400">
-                  Already have an account?{" "}
-                  <a href="/login" className="text-blue-500 hover:underline">
-                    Login
-                  </a>
-                </p>
-              </div>
-            </div>
+
+          {/* Inputs */}
+          <input
+            type="text"
+            placeholder="Username"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="input"
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input"
+          />
+
+          <div className="relative">
+            <input
+              type={show ? "text" : "password"}
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input"
+            />
+            {show ? (
+              <MdOutlineRemoveRedEye
+                className="eye"
+                onClick={() => setShow(false)}
+              />
+            ) : (
+              <IoEyeOffSharp
+                className="eye"
+                onClick={() => setShow(true)}
+              />
+            )}
           </div>
+
+          {/* Submit */}
+          <button className="w-full h-[50px] bg-[#42656cae] rounded-lg font-semibold hover:bg-[#42656ca0] transition">
+            Create Account
+          </button>
+
+          <p className="text-sm text-gray-400 text-center">
+            Already have an account?{" "}
+            <span
+              className="text-blue-500 cursor-pointer hover:underline"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </span>
+          </p>
         </form>
       </div>
     </div>
   );
 };
+
 export default Registration;
