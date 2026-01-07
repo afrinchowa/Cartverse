@@ -20,7 +20,7 @@ let [show,setShow]=React.useState(false);
     e.preventDefault();
     try {
       const result = await axios.post(
-        serverUrl + "/api/users/login",
+        serverUrl + "/api/auth/login",
         {
           email: email,
           password: password,

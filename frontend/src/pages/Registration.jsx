@@ -21,9 +21,9 @@ export const Registration = () => {
     e.preventDefault();
     try {
       const result = await axios.post(
-        serverUrl + "/api/users/register",
+        serverUrl + "/api/auth/registration",
         {
-          username: name,
+          name: name,
           email: email,
           password: password,
         },
