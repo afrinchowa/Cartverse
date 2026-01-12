@@ -12,11 +12,14 @@ const isAuth = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid token" });
     }
 
-req.userId = veryfyToken.userId;
+    req.userId = veryfyToken.userId;
     next();
   } catch (error) {
-    res.status(401).json({ message: `googleLogin error ${error.message}` });
+    console.log("isAuth error")
+    return res.status(401).json({ message: `isAuth error ${error.message}` });
   }
 };
 
 module.exports = isAuth;
+
+export default isAuth;
