@@ -13,7 +13,7 @@ let [show,setShow]=React.useState(false);
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
   let {serverUrl} =React.useContext(authDataContext);
-
+let {getCurrentUser} =React.useContext(userDataContext);
 
   const navigate = useNavigate();
 
@@ -29,6 +29,8 @@ let [show,setShow]=React.useState(false);
         { withCredentials: true }
       );
       console.log(result.data);
+      getCurrentUser();
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

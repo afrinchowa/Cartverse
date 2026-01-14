@@ -1,6 +1,6 @@
 import User from "../model/User";
 
-export const getCurrentUser = async (params) => {
+export const getCurrentUser = async (req,res) => {
     try {
         // Logic to get current user details
         const user=await User.findById(params.userId).select("-password");
