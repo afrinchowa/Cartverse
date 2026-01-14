@@ -16,6 +16,7 @@ export const Registration = () => {
   let [name, setName] = React.useState("");
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
+  // eslint-disable-next-line no-unused-vars
   let {userData, getCurrentUser} = React.useContext(userDataContext);
   const navigate = useNavigate();
   const handleSignup = async (e) => {

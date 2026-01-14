@@ -1,34 +1,46 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable no-undef */
 import axios from "axios";
-import React, { createContext,  useContext, useState } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect
+} from "react";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const userDataContext = createContext(null);
 
 function UserContext({ children }) {
-    let [userData, setUserData] = useState(null);
-    let {serverUrl} = useContext(userDataContext);
-const getCurrentUser = async () => {
-    try {
-        let result = await axios.post(serverUrl + "/api/user/current", {}, { withCredentials: true });
-        if (result.data) {
-            setUserData(result.data);
-        }
-    } catch (error) {
-        setUserData(null);
-        console.error("Error fetching current user:", error);
-    }
-};
-useEffect(() => {
-    getCurrentUser();
-}, []);
+  const [userData, setUserData] = useState(null);
 
-  let value = {
-    userData, setUserData, getCurrentUser
- };
-  
+  // Configuration belongs here (or env file)
+  const serverUrl = "http://localhost:5000";
+
+  const getCurrentUser = async () => {
+    try {
+      const result = await axios.get(
+        `${serverUrl}/api/user/current`,
+        { withCredentials: true }
+      );
+
+      setUserData(result.data);
+    } catch (error) {
+      setUserData(null);
+      console.error("Error fetching current user:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  const value = {
+    userData,
+    setUserData,
+    getCurrentUser,
+  };
+
   return (
-    <userDataContext.Provider value={{ value }}>
+    <userDataContext.Provider value={value}>
       {children}
     </userDataContext.Provider>
   );

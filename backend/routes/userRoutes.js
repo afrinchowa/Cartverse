@@ -1,18 +1,26 @@
-import express from 'express';
-const userRoutes = express.Router();
-import isAuth from '../middleware/isAuth.js';
-import { getCurrentUser } from '../controller/userController.js';
+import User from "../model/User.js";
 
-userRoutes.get('/current', isAuth, async (req, res) => {
-    try {
-        const result = await getCurrentUser({ userId: req.userId });
-        if(result.status){
-            return res.status(result.status).json({ message: result.message });
-        }   
-        return res.status(200).json(result);
-    } catch (error) {
-        return res.status(500).json({ message: `Error fetching current user: ${error.message}` });
+export const getCurrentUser = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
     }
-});
 
-module.exports = userRoutes;
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json(user);
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error fetching current user",
+      error: error.message,
+    });
+  }
+};
+export default getCurrentUser;
