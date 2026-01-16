@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { FaSearchLocation, FaUserAlt, FaBars, FaTimes } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 
 const Nav = () => {
+  let {userData}=useContext(userDataContext)
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,8 +35,12 @@ const Nav = () => {
         {/* Icons */}
         <div className="flex items-center gap-4 text-[20px]">
           <FaSearchLocation className="cursor-pointer" />
-          <FaUserAlt className="cursor-pointer" />
+            
+         { !userData && <FaUserAlt className="cursor-pointer" /> }
+       {userData && <div className="w-[30px] h-[30px] bg-[#080808] text-white rounded-full flex items-center gap-2">{userData?.name.slice(0,1)}</div>}
           <TiShoppingCart className="cursor-pointer text-[24px]" />
+               <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-23">10</p>
+      
 
           {/* Mobile Menu Toggle */}
           <button
