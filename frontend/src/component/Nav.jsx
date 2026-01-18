@@ -36,7 +36,7 @@ const Nav = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-4 text-[20px]">
-          <FaSearchLocation className="cursor-pointer" />
+          <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />
 
           {!userData && <FaUserAlt className="cursor-pointer" />}
           {userData && (
@@ -49,11 +49,11 @@ const Nav = () => {
             10
           </p>
 
-          <div>
-            <div className="w-[100%] h-[80px] bg-[#080808] absolute top-[100%] left-0 right-0 flex items-center justify-center text-white rounded-full flex items-center gap-2">
+        
+          {showSearch &&  <div className="w-[100%] h-[80px] bg-[#080808] absolute top-[100%] left-0 right-0 flex items-center justify-center text-white rounded-full flex items-center gap-2">
               <input type="text" className="w-[50%] h-[60%] bg-[#233533] rounded-[30px] x-[50px]" placeholder="search-here" />
-            </div>
-          </div>
+            </div>}
+         
           {/* Mobile Menu Toggle */}
           <button
             className="md:hidden text-[22px]"
