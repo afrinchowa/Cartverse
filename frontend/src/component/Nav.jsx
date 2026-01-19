@@ -36,8 +36,8 @@ const Nav = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-4 text-[20px]">
-          <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />
-
+         { <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />}
+   <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />
           {!userData && <FaUserAlt className="cursor-pointer" />}
           {userData && (
             <div className="w-[30px] h-[30px] bg-[#080808] text-white rounded-full flex items-center gap-2">
