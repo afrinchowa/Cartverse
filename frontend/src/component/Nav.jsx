@@ -1,33 +1,38 @@
 import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
-import { FaSearchLocation, FaUserAlt, FaBars, FaTimes } from "react-icons/fa";
+import { FaUserAlt, FaBars, FaTimes } from "react-icons/fa";
+import {
+  IoSearchCircleSharp,
+  IoSearchCircleOutline,
+} from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { userDataContext } from "../context/UserContext";
 
 const Nav = () => {
-  let { userData } = useContext(userDataContext);
-  let { showSearch, setShowSearch } = useState(false);
+  const { userData } = useContext(userDataContext);
 
+  const [showSearch, setShowSearch] = useState(false);
   const [open, setOpen] = useState(false);
 
   return (
     <>
       {/* Navbar */}
-      <div className="w-full h-[70px] bg-[#ecfafaec] z-50 fixed top-0 flex items-center justify-between px-4 md:px-[30px] shadow-md shadow-black relative">
+      <div className="w-full h-[70px] bg-[#ecfafaec] fixed top-0 z-50 flex items-center justify-between px-4 md:px-[30px] shadow-md shadow-black relative">
+        
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img src={logo} alt="Cartverse" className="w-[55px] md:w-[70px]" />
-          <h1 className="text-[20px] md:text-[25px] font-sans font-semibold">
+          <h1 className="text-[20px] md:text-[25px] font-semibold">
             Cartverse
           </h1>
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-6 text-black font-medium">
+        <ul className="hidden md:flex items-center gap-6">
           {["Home", "Collections", "About", "Contact"].map((item) => (
             <li
               key={item}
-              className="text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] text-white py-2 px-4 rounded-lg transition"
+              className="text-[14px] cursor-pointer bg-black text-white py-2 px-4 rounded-lg hover:bg-slate-600 transition"
             >
               {item}
             </li>
@@ -35,33 +40,75 @@ const Nav = () => {
         </ul>
 
         {/* Icons */}
-        <div className="flex items-center gap-4 text-[20px]">
-         { <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />}
-   <FaSearchLocation className="cursor-pointer w-[38px] h-38px] text-[#000000] "onClick={() => setShowSearch(prev => !prev) } />
-          {!userData && <FaUserAlt className="cursor-pointer" />}
-          {userData && (
-            <div className="w-[30px] h-[30px] bg-[#080808] text-white rounded-full flex items-center gap-2">
-              {userData?.name.slice(0, 1)}
+        <div className="flex items-center gap-4 text-[22px] relative">
+          
+          {/* Search Toggle */}
+          {!showSearch ? (
+            <IoSearchCircleOutline
+              className="cursor-pointer"
+              onClick={() => setShowSearch(true)}
+            />
+          ) : (
+            <IoSearchCircleSharp
+              className="cursor-pointer"
+              onClick={() => setShowSearch(false)}
+            />
+          )}
+
+          {/* User */}
+          {!userData ? (
+            <FaUserAlt className="cursor-pointer" />
+          ) : (
+            <div className="w-[32px] h-[32px] bg-black text-white rounded-full flex items-center justify-center font-semibold">
+              {userData?.name?.slice(0, 1)}
             </div>
           )}
-          <TiShoppingCart className="cursor-pointer text-[24px]" />
-          <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-23">
-            10
-          </p>
 
-        
-          {showSearch &&  <div className="w-[100%] h-[80px] bg-[#080808] absolute top-[100%] left-0 right-0 flex items-center justify-center text-white rounded-full flex items-center gap-2">
-              <input type="text" className="w-[50%] h-[60%] bg-[#233533] rounded-[30px] x-[50px]" placeholder="search-here" />
-            </div>}
-         
-          {/* Mobile Menu Toggle */}
+          {/* Cart */}
+          <div className="relative">
+            <TiShoppingCart className="cursor-pointer text-[26px]" />
+            <span className="absolute -top-2 -right-2 w-[18px] h-[18px] bg-black text-white rounded-full text-[10px] flex items-center justify-center">
+              10
+            </span>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-[22px]"
+            className="md:hidden text-[24px]"
             onClick={() => setOpen(!open)}
           >
             {open ? <FaTimes /> : <FaBars />}
           </button>
         </div>
+
+        {/* Search Bar */}
+{showSearch && (
+  <div className="absolute top-[100%] left-0 w-full bg-slate-400/90 backdrop-blur-md flex justify-center py-6 z-40">
+    <div className="relative w-[90%] md:w-[55%]">
+      
+      {/* Search Icon */}
+      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">
+        <IoSearchCircleOutline />
+      </span>
+
+      {/* Input */}
+      <input
+        type="text"
+        placeholder="Search products, collections..."
+        className="w-full h-[50px] pl-12 pr-12 rounded-full text-black outline-none focus:ring-2 focus:ring-white transition"
+      />
+
+      {/* Close Button */}
+      <button
+        onClick={() => setShowSearch(false)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition"
+      >
+        <FaTimes />
+      </button>
+    </div>
+  </div>
+)}
+
       </div>
 
       {/* Mobile Menu */}
@@ -75,7 +122,7 @@ const Nav = () => {
             <li
               key={item}
               onClick={() => setOpen(false)}
-              className="w-[80%] text-center text-[15px] bg-black text-white py-3 rounded-lg cursor-pointer hover:bg-slate-600 transition"
+              className="w-[80%] text-center bg-black text-white py-3 rounded-lg cursor-pointer hover:bg-slate-600 transition"
             >
               {item}
             </li>
