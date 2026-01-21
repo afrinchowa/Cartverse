@@ -12,6 +12,7 @@ const Nav = () => {
   const { userData } = useContext(userDataContext);
 
   const [showSearch, setShowSearch] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [open, setOpen] = useState(false);
 
   return (
@@ -71,7 +72,9 @@ const Nav = () => {
               10
             </span>
           </div>
+<div className="absolute w-[220px] h-[150px] bg-[#000000d7] top-110% ">
 
+</div>
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-[24px]"
