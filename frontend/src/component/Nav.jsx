@@ -60,7 +60,7 @@ const Nav = () => {
           {!userData ? (
             <FaUserAlt className="cursor-pointer" />
           ) : (
-            <div className="w-[32px] h-[32px] bg-black text-white rounded-full flex items-center justify-center font-semibold">
+            <div className="w-[32px] h-[32px] bg-black text-white rounded-full flex items-center justify-center font-semibold cursor-pointer" onClick={() => setShowProfile(prev=>!prev)}>
               {userData?.name?.slice(0, 1)}
             </div>
           )}
@@ -72,9 +72,9 @@ const Nav = () => {
               10
             </span>
           </div>
-<div className="absolute w-[220px] h-[150px] bg-[#000000d7] top-110% ">
+{showProfile && <div className="absolute w-[220px] h-[150px] bg-[#000000d7] top-[110%] right-[4%] border-[1px]  border-[#aaa9a9] rounded-[10px] z-10">
 
-</div>
+</div>}
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-[24px]"
