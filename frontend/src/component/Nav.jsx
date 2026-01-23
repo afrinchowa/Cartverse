@@ -8,7 +8,9 @@ import { userDataContext } from "../context/UserContext";
 
 const Nav = () => {
   const { userData } = useContext(userDataContext);
-
+const handleProfileToggle = () => {
+  setShowProfile((prev) => !prev);
+};
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,25 +54,24 @@ const Nav = () => {
             />
           )}
 
-          {/* User Icon / Profile */}
-          {userData ? (
-            <div
-              className="w-[35px] h-[35px] bg-[#080808] text-white rounded-full flex items-center justify-center cursor-pointer"
-              onClick={() => setShowProfile((prev) => !prev)}
-            >
-              {userData.name.slice(0, 1).toUpperCase()}
-            </div>
-          ) : (
-            <FaCircleUser className="w-[35px] h-[35px] text-[#000000] cursor-pointer" />
-          )}
+{/* User Icon */}
+<div
+  className="w-[35px] h-[35px] bg-[#080808] text-white rounded-full flex items-center justify-center cursor-pointer"
+  onClick={handleProfileToggle}
+>
+  {userData ? userData.name.slice(0, 1).toUpperCase() : <FaCircleUser />}
+</div>
+
 
           {/* Profile Dropdown */}
-          {showProfile && userData && (
+          {showProfile  && (
             <div className="absolute top-[110%] right-0 w-[220px] bg-[#000000d7] border border-[#aaa9a9] rounded-[10px] z-10 p-4 flex flex-col gap-2">
-              <p className="text-white font-semibold">{userData.name}</p>
-              <button className="mt-2 w-full bg-white text-black py-2 rounded-lg hover:bg-gray-200">
-                Logout
-              </button>
+              <ul className="w-100% h-100% flex items-start justify-around flex-col text-[17px] py-[10px] text-white ">
+                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">Login</li>
+                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">Logout</li>
+                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">Orders</li>
+                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">About</li>
+              </ul>
             </div>
           )}
 
