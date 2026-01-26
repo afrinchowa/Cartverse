@@ -5,6 +5,9 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { IoSearchCircleSharp, IoSearchCircleOutline } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { userDataContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { authDataContext } from "../context/AuthContext";
 
 const Nav = () => {
   const {getCurrentUser,  userData } = useContext(userDataContext);
@@ -18,7 +21,7 @@ const handleProfileToggle = () => {
 
   const menuItems = ["Home", "Collections", "About", "Contact"];
 let navigate = useNavigate();
-const handleLogOut = () => {
+const handleLogOut = async() => {
   try{
     const result =await axios.get(serverUrl + "/api/auth/logout", { withCredentials: true });
     console.log(result.data)
