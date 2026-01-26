@@ -21,6 +21,8 @@ let navigate = useNavigate();
 const handleLogOut = () => {
   try{
     const result =await axios.get(serverUrl + "/api/auth/logout", { withCredentials: true });
+    console.log(result.data)
+    getCurrentUser();
     if(result.data.success){
       navigate("/login");
     }
@@ -77,15 +79,15 @@ const handleLogOut = () => {
           {/* Profile Dropdown */}
           {showProfile  && (
             <div className="absolute top-[110%] right-0 w-[220px] bg-[#000000d7] border border-[#aaa9a9] rounded-[10px] z-10 p-4 flex flex-col gap-2">
-              <ul className="w-100% h-100% flex items-start justify-around flex-col text-[17px] py-[10px] text-white ">
-               {!userData &&  <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer " onClick={()=>{
+              <ul className="w-100% h-100% flex items-start justify-around flex-col text-[17px] py-2.5 text-white ">
+               {!userData &&  <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-2.5 cursor-pointer " onClick={()=>{
                 navigate("/login") ; setShowProfile(false);
                }}>Login</li> }
-               { userData && <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer " onClick={()=>{
-                navigate("/logout") ; setShowProfile(false);
+               { userData && <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-2.5 cursor-pointer " onClick={()=>{
+                handleLogOut(); setShowProfile(false);
                }}>Logout</li>}
-                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">Orders</li>
-                <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer ">About</li>
+                <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-2.5 cursor-pointer ">Orders</li>
+                <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-2.5 cursor-pointer ">About</li>
               </ul>
             </div>
           )}
