@@ -15,6 +15,10 @@ const Nav = () => {
 const handleProfileToggle = () => {
   setShowProfile((prev) => !prev);
 };
+const handleProfileToggleClose = () => {
+  setShowProfile(false);
+};
+
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
