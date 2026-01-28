@@ -18,6 +18,9 @@ const handleProfileToggle = () => {
 const handleProfileToggleClose = () => {
   setShowProfile(false);
 };
+const handleSearchToggleClose = () => {
+  setShowSearch(false);
+};
 
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -46,7 +49,17 @@ const handleLogOut = async() => {
           <img src={logo} alt="Cartverse" className="w-[55px] md:w-[70px]" />
           <h1 className="text-[20px] md:text-[25px] font-semibold">Cartverse</h1>
         </div>
-
+<div>
+        {/* Overlay to close profile and search when clicking outside */}
+        {(showProfile || showSearch) && (
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => {
+              handleProfileToggleClose();
+              handleSearchToggleClose();
+            }}
+          />
+        )}
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
           {menuItems.map((item) => (
