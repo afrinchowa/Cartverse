@@ -17,7 +17,7 @@ export const Registration = () => {
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
   // eslint-disable-next-line no-unused-vars
-  let {userData, getCurrentUser} = React.useContext(userDataContext);
+  let { userData, getCurrentUser } = React.useContext(userDataContext);
   const navigate = useNavigate();
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -29,32 +29,37 @@ export const Registration = () => {
           email: email,
           password: password,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
+      getCurrentUser();
+      navigate("/");
       console.log(result.data);
     } catch (error) {
       console.log(error);
     }
   };
-  const googleSignup =async()=>{
-try{
-const response=await signInWithPopup(auth ,provider);
-let user = response.user
-let name = user.displayName;
-let email = user.email;
-const result =await axios.post(
-  serverUrl + "/api/auth/googleLogin",
-  {
-    name: name,
-    email: email,
-  },
-  { withCredentials: true }
-);
-console.log(result.data);
-}catch(error){
-console.log(error);
-}
-  }
+  const googleSignup = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
+      const result = await axios.post(
+        serverUrl + "/api/auth/googleLogin",
+        {
+          name: name,
+          email: email,
+        },
+        { withCredentials: true },
+     
+      );
+          getCurrentUser();
+      navigate("/");
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
@@ -80,7 +85,10 @@ console.log(error);
           onSubmit={handleSignup}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
         >
-          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer" onClick={googleSignup}>
+          <div
+            className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer"
+            onClick={googleSignup}
+          >
             <img src={google} alt="" className="w-7" />
             Registration with Google
           </div>
