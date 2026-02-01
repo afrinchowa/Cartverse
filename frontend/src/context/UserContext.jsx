@@ -1,37 +1,38 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import axios from "axios";
 import React, {
   createContext,
   useState,
-  useEffect
+  useEffect,
+  useCallback,
 } from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
+// Context
 export const userDataContext = createContext(null);
 
-function UserContext({ children }) {
+const UserContext = ({ children }) => {
   const [userData, setUserData] = useState(null);
 
-  // Configuration belongs here (or env file)
+  // Single source of truth (later move to .env)
   const serverUrl = "http://localhost:5000";
 
-  const getCurrentUser = async () => {
+  const getCurrentUser = useCallback(async () => {
     try {
-      const result = await axios.get(
+      const res = await axios.get(
         `${serverUrl}/api/user/current`,
         { withCredentials: true }
       );
 
-      setUserData(result.data);
+      // ✅ Defensive assignment
+      setUserData(res.data?.user || res.data || null);
     } catch (error) {
-      setUserData(null);
       console.error("Error fetching current user:", error);
+      setUserData(null);
     }
-  };
+  }, [serverUrl]);
 
   useEffect(() => {
     getCurrentUser();
-  }, []);
+  }, [getCurrentUser]);
 
   const value = {
     userData,
@@ -44,6 +45,6 @@ function UserContext({ children }) {
       {children}
     </userDataContext.Provider>
   );
-}
+};
 
 export default UserContext;
