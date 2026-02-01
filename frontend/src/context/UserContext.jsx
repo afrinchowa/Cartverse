@@ -1,38 +1,41 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import axios from "axios";
 import React, {
   createContext,
   useState,
-  useEffect,
-  useCallback,
+  useEffect
 } from "react";
 
-// Context
+// eslint-disable-next-line react-refresh/only-export-components
 export const userDataContext = createContext(null);
 
-const UserContext = ({ children }) => {
+function UserContext({ children }) {
   const [userData, setUserData] = useState(null);
 
-  // Single source of truth (later move to .env)
+  // Configuration belongs here (or env file)
   const serverUrl = "http://localhost:5000";
 
-  const getCurrentUser = useCallback(async () => {
-    try {
-      const res = await axios.get(
-        `${serverUrl}/api/user/current`,
-        { withCredentials: true }
-      );
+ const getCurrentUser = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return setUserData(null);
 
-      // ✅ Defensive assignment
-      setUserData(res.data?.user || res.data || null);
-    } catch (error) {
-      console.error("Error fetching current user:", error);
-      setUserData(null);
-    }
-  }, [serverUrl]);
+    const result = await axios.get(`${serverUrl}/api/user/current`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setUserData(result.data);
+  } catch (error) {
+    setUserData(null);
+    console.error("Error fetching current user:", error);
+  }
+};
 
   useEffect(() => {
     getCurrentUser();
-  }, [getCurrentUser]);
+  }, []);
 
   const value = {
     userData,
@@ -45,6 +48,6 @@ const UserContext = ({ children }) => {
       {children}
     </userDataContext.Provider>
   );
-};
+}
 
 export default UserContext;

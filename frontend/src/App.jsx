@@ -1,24 +1,25 @@
-import React, {  useContext } from 'react'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Registration from './pages/Registration'
-import { Route, Routes } from 'react-router-dom'
-import Nav from './component/Nav'
-import { userDataContext } from './context/UserContext'
+import React from "react";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import { Route, Routes } from "react-router-dom";
+import Nav from "./component/Nav";
+import UserContext from "./context/UserContext";
+import AuthContext from "./context/AuthContext";
 
-
-export const App = () => {
-  const {userData}= useContext(userDataContext);
+const App = () => {
   return (
-    <>
-    {userData && <Nav/>}
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/signup" element={<Registration/>}/>
+    <UserContext>
+      <AuthContext>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Registration />} />
+        </Routes>
+      </AuthContext>
+    </UserContext>
+  );
+};
 
-    </Routes>
-    </>
-  )
-}
-export default App
+export default App;

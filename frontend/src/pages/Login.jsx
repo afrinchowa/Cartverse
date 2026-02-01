@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from "react";
 import Logo from "../assets/logo.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -8,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { auth, provider } from "../utils/Firebase";
 import { signInWithPopup } from "firebase/auth";
+
+// ✅ Import contexts
+import { authDataContext } from "../context/AuthContext";
+import { userDataContext } from "../context/UserContext";
+
 const Login = () => {
 let [show,setShow]=React.useState(false);
   let [email, setEmail] = React.useState("");
