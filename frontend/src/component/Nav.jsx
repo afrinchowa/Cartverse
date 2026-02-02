@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-
+import { IoMdHome } from "react-icons/io";
 import { IoSearchCircleSharp, IoSearchCircleOutline } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { userDataContext } from "../context/UserContext";
@@ -40,10 +40,9 @@ const Nav = () => {
 
   const handleLogOut = async () => {
     try {
-      const res = await axios.get(
-        `${serverUrl}/api/auth/logout`,
-        { withCredentials: true }
-      );
+      const res = await axios.get(`${serverUrl}/api/auth/logout`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         getCurrentUser();
         navigate("/login");
@@ -57,7 +56,6 @@ const Nav = () => {
   return (
     <>
       <nav className="w-full h-[70px] bg-[#ecfafaec] fixed top-0 z-50 flex items-center justify-between px-4 md:px-[30px] shadow-md">
-
         {/* Logo */}
         <div
           className="flex items-center gap-2 cursor-pointer"
@@ -84,7 +82,6 @@ const Nav = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-4 text-[22px] relative">
-
           {/* Search */}
           {showSearch ? (
             <IoSearchCircleSharp
@@ -109,9 +106,11 @@ const Nav = () => {
               setShowSearch(false);
             }}
           >
-            {userData?._id
-              ? userData.name.charAt(0).toUpperCase()
-              : <FaCircleUser />}
+            {userData?._id ? (
+              userData.name.charAt(0).toUpperCase()
+            ) : (
+              <FaCircleUser />
+            )}
           </div>
 
           {/* Profile Dropdown */}
@@ -165,6 +164,26 @@ const Nav = () => {
           >
             {mobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
+        </div>
+
+        <div className="w-full h-[90px] flex items-center justify-between px-[20px] fixed bottom-0 left-0 bg-[#191818] md:hidden">
+          <button className="text-white flex items-center justify-center flex-col gap-2">
+            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            Home
+          </button>
+          <button className="text-white flex items-center justify-center flex-col gap-2">
+            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            Home
+          </button>
+          <button className="text-white flex items-center justify-center flex-col gap-2">
+            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            Home
+          </button>
+          <button className="text-white flex items-center justify-center flex-col gap-2">
+            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            Home
+          </button>
+        
         </div>
       </nav>
 
