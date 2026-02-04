@@ -173,15 +173,15 @@ const Nav = () => {
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
             <IoMdHome className="w-30px h-30px text-white md:hidden "/>
-            Home
+            About
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
             <IoMdHome className="w-30px h-30px text-white md:hidden "/>
-            Home
+            News
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
             <IoMdHome className="w-30px h-30px text-white md:hidden "/>
-            Home
+            Go
           </button>
         
         </div>
