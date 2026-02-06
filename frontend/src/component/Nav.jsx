@@ -9,7 +9,8 @@ import { userDataContext } from "../context/UserContext";
 import { authDataContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { HiOutlineCollection } from "react-icons/hi";
+import { MdContactEmergency } from "react-icons/md";
 const Nav = () => {
   const { getCurrentUser, userData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
@@ -172,15 +173,15 @@ const Nav = () => {
             Home
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            <HiOutlineCollection className="w-30px h-30px text-white md:hidden "/>
             Collection
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            <MdContactEmergency className="w-30px h-30px text-white md:hidden "/>
             Contact
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <IoMdHome className="w-30px h-30px text-white md:hidden "/>
+            <TiShoppingCart className="w-30px h-30px text-white md:hidden "/>
             Cart
           </button>
         
