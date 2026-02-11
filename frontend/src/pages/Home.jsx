@@ -1,10 +1,9 @@
 import React from 'react'
 
-
-const Home = () => {
+function Home() {
   return (
-    <div className='w-[100vw] h-[100vw] bg-gradient-to-1 from-[#141414] to-[#0c2025]'>
-     
+    <div className='w-full h-screen flex items-center justify-center text-20px md:text-[40px] lg:text-[55px] text-[#88d933] '>
+      <p>Welcome to our website!</p>
     </div>
   )
 }
