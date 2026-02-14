@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Background from '../component/Background'
+import Hero from '../component/Hero'
 
 function Home() {
 
@@ -20,7 +21,10 @@ function Home() {
     <div className='w-full h-screen flex items-center justify-center text-20px md:text-[40px] lg:text-[55px] text-[#88d933] '>
       <p>{heroData[heroCount].text1} {heroData[heroCount].text2}</p>
     
-    <Background/>
+    <Background heroCount={heroCount}/>
+    <Hero heroCount={heroCount} 
+    setHeroCount={setHeroCount} 
+    heroData={heroData[heroCount]}/>
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import back1 from "../assets/back1.png"
-import back2 from "../assets/back2.png"
-import back3 from "../assets/back3.png"
-import back4 from "../assets/back4.png"
+import back1 from "../assets/back1.jpg"
+import back2 from "../assets/back2.jpg"
+import back3 from "../assets/back3.jpg"
+import back4 from "../assets/back4.jpg"
 function Background({heroCount}) {
    if(heroCount === 0){
     return <img src={back1} alt="background" className='w-full h-full float-left overflow-auto object-cover' />
