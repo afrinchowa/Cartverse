@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Background from '../component/Background'
 import Hero from '../component/Hero'
 
@@ -11,6 +11,11 @@ function Home() {
     {text1: "Unleash your gaming potential", text2: "with us!"},
   ]
   let [heroCount, setHeroCount] = useState(0)
+  useEffect(() => {    const interval = setInterval(() => {
+      setHeroCount((prevCount) => (prevCount + 1) % heroData.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
   React.useEffect(() => {
     const interval = setInterval(() => {
       setHeroCount((prevCount) => (prevCount + 1) % heroData.length)
