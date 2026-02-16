@@ -23,6 +23,7 @@ function Home() {
     return () => clearInterval(interval)
   }, [])
   return (
+  <div className='overflow-x-hidden relative top-[70px]'>
     <div className='w-full h-screen flex items-center justify-center text-20px md:text-[40px] lg:text-[55px] text-[#88d933] '>
       <p>{heroData[heroCount].text1} {heroData[heroCount].text2}</p>
     
@@ -30,6 +31,7 @@ function Home() {
     <Hero heroCount={heroCount} 
     setHeroCount={setHeroCount} 
     heroData={heroData[heroCount]}/>
+    </div>
     </div>
   )
 }
