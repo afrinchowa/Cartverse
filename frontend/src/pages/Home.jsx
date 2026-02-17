@@ -24,7 +24,7 @@ function Home() {
   }, [])
   return (
   <div className='overflow-x-hidden relative top-[70px]'>
-    <div className='w-full h-screen flex items-center justify-center text-20px md:text-[40px] lg:text-[55px] text-[#88d933] '>
+    <div className='w-full h-screen md:h-[50vh] sm:h-[30vh] bg-gradient-to-1 from-[#141414] to-[#0c2025] flex items-center justify-center text-20px md:text-[40px] lg:text-[55px] text-[#88d933] '>
       <p>{heroData[heroCount].text1} {heroData[heroCount].text2}</p>
     
     <Background heroCount={heroCount}/>
