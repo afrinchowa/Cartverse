@@ -13,3 +13,16 @@ export const genToken = (userId) => {
     return null;
   }
 };
+export const genToken1 = (email) => {
+  try {
+    const token = jwt.sign(
+      { userId },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+    return token;
+  } catch (error) {
+    console.error("Token generation error:", error.message);
+    return null;
+  }
+};
