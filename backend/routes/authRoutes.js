@@ -8,6 +8,7 @@ authRoutes.post("/login",login )
 authRoutes.get("/logout",logOut )
 authRoutes.post("/googleLogin",googleLogin)
 authRoutes.post("/adminLogin",adminLogin)
+authRoutes.post("/adminLogout",adminLogout)
 
 
 
