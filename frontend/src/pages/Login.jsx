@@ -13,11 +13,11 @@ import { authDataContext } from "../context/AuthContext";
 import { userDataContext } from "../context/UserContext";
 
 const Login = () => {
-let [show,setShow]=React.useState(false);
+  let [show, setShow] = React.useState(false);
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
-  let {serverUrl} =React.useContext(authDataContext);
-let {getCurrentUser} =React.useContext(userDataContext);
+  let { serverUrl } = React.useContext(authDataContext);
+  let { getCurrentUser } = React.useContext(userDataContext);
 
   const navigate = useNavigate();
 
@@ -29,8 +29,8 @@ let {getCurrentUser} =React.useContext(userDataContext);
         {
           email: email,
           password: password,
-        },  
-        { withCredentials: true }
+        },
+        { withCredentials: true },
       );
       console.log(result.data);
       getCurrentUser();
@@ -39,25 +39,25 @@ let {getCurrentUser} =React.useContext(userDataContext);
       console.log(error);
     }
   };
-    const googleLogin =async()=>{
-try{
-const response=await signInWithPopup(auth ,provider);
-let user = response.user
-let name = user.displayName;
-let email = user.email;
-const result =await axios.post(
-  serverUrl + "/api/auth/googleLogin",
-  {
-    name: name,
-    email: email,
-  },
-  { withCredentials: true }
-);
-console.log(result.data);
-}catch(error){
-console.log(error);
-}
-  }
+  const googleLogin = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
+      const result = await axios.post(
+        serverUrl + "/api/auth/googleLogin",
+        {
+          name: name,
+          email: email,
+        },
+        { withCredentials: true },
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
       <div
@@ -68,9 +68,7 @@ console.log(error);
         <h1 className="text-[22px] text-white font-sans">CartVerse</h1>
       </div>
       <div className="w-full h-[100px] flex items-center justify-center flex-col gap-2.5">
-        <span className="text-[25px] font-semibold text-white">
-          Login page
-        </span>
+        <span className="text-[25px] font-semibold text-white">Login page</span>
         <span className="text-[16px] text-gray-400">
           Welcome to CartVerse,Place your Order
         </span>
@@ -79,10 +77,14 @@ console.log(error);
       <div className="max-w-[600px] w-[90%] h-[500px] bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg  flex items-center justify-center">
         {/* Registration form can be added here */}
         <form
-          action="" onSubmit={handleLogin}
+          action=""
+          onSubmit={handleLogin}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
         >
-          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer" onClick={googleLogin}>
+          <div
+            className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg  flex  items-center justify-center gap-2.5 py-5 cursor-pointer"
+            onClick={googleLogin}
+          >
             <img src={google} alt="" className="w-7" />
             Login with Google
           </div>
@@ -91,23 +93,32 @@ console.log(error);
               <div className="w-[40%] h-px bg-[#96969635]"></div>Or
               <div className="w-[40%] h-px bg-[#96969635]"></div>
               <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] relative">
-              
                 <input
                   type="text"
                   placeholder="Email"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required onChange={(e)=>setEmail(e.target.value)} value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
                 <input
-                  type={show?"text":"password"}
+                  type={show ? "text" : "password"}
                   placeholder="Password"
                   className="w-full h-[50px] border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                  required onChange={(e)=>setPassword(e.target.value)} value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
                 {show ? (
-                  <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <MdOutlineRemoveRedEye
+                    className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute "
+                    onClick={() => setShow((prev) => !prev)}
+                  />
                 ) : (
-                  <IoEyeOffSharp className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
+                  <IoEyeOffSharp
+                    className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute "
+                    onClick={() => setShow((prev) => !prev)}
+                  />
                 )}
                 <button className="w-full h-[50px] bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
                   Login
@@ -115,7 +126,7 @@ console.log(error);
                 <p className="text-[14px] text-gray-400">
                   You haven't any account?{" "}
                   <a href="/signup" className="text-blue-500 hover:underline">
-                   New Registration
+                    New Registration
                   </a>
                 </p>
               </div>
@@ -125,6 +136,6 @@ console.log(error);
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;
