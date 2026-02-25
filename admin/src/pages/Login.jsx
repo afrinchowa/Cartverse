@@ -1,69 +1,94 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoEyeOffSharp } from "react-icons/io5";
+import axios from "axios";
 import Logo from "../assets/logo.png";
+import { authDataContext } from "../context/AuthContext";
+
 function Login() {
-    let [show, setShow] = React.useState(false);
-    let [email, setEmail] = React.useState("");
-    let [password, setPassword] = React.useState("");
+  const [show, setShow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { serverUrl } = useContext(authDataContext);
+
+  const AdminLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${serverUrl}/api/auth/adminLogin`,
+        { email, password },
+        { withCredentials: true }
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
+  };
+
   return (
-    <div className="w-screen h-screen bg-black text-[white] flex flex-col items-center justify-start">
-          <div
-            className="w-full h-20 flex items-center justify-start px-7.5 gap-2.5 cursor-pointer "
-            
-          >
-            <img className="w-10" src={Logo} alt="" />
-            <h1 className="text-[22px] text-white font-sans">CartVerse</h1>
-          </div>
-          <div className="w-full h-25 flex items-center justify-center flex-col gap-2.5">
-            <span className="text-[25px] font-semibold text-white">
-              Login page
-            </span>
-            <span className="text-[16px] text-gray-400">
-              Welcome to CartVerse,Apply to Admin login
-            </span>
-          </div>
-    
-          <div className="max-w-150 w-[90%] h-125 bg-[#00000025] border border-[#96969635] backdrop-blur-2xl rounded-lg shadow-lg  flex items-center justify-center">
-            {/* Registration form can be added here */}
-            <form
-              action="" 
-              className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5 "
-            >
-              
-              <div className="w-full flex  items-center justify-center gap-10">
-                <div className="w-full  flex flex-col items-center justify-center gap-2.5">
-                 
-                  <div className="w-[90%] h-100 flex flex-col items-center justify-center gap-3.75 relative">
-                  
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      className="w-full h-12.5 border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                      required onChange={(e)=>setEmail(e.target.value)} value={email}
-                    />
-                    <input
-                      type={show?"text":"password"}
-                      placeholder="Password"
-                      className="w-full h-12.5 border-2 border-[#96969635] backdrop-blur-sm shadow-lg bg-transparent placeholder-[#ffffffc7] px-5 font-semibold"
-                      required onChange={(e)=>setPassword(e.target.value)} value={password}
-                    />
-                    {show ? (
-                      <MdOutlineRemoveRedEye className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
-                    ) : (
-                      <IoEyeOffSharp className="w-5 h-5 bottom-[52%] right-[5%] cursor-pointer absolute " onClick={()=>setShow(prev =>!prev)} />
-                    )}
-                    <button className="w-full h-12.5 bg-[#42656cae] rounded-lg text-white font-semibold cursor-pointer hover:bg-[#42656ca0] transition-colors duration-300">
-                      Login
-                    </button>
-                    
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+    <div className="min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
+      
+      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-8">
+
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <img src={Logo} alt="CartVerse" className="w-14 mb-3" />
+          <h1 className="text-2xl font-semibold text-white">CartVerse</h1>
+          <p className="text-sm text-gray-400 mt-1">
+            Admin Login Portal
+          </p>
         </div>
-  )
+
+        {/* Form */}
+        <form onSubmit={AdminLogin} className="space-y-4">
+
+          <input
+            type="email"
+            placeholder="Email address"
+            className="w-full h-12 rounded-lg bg-black/40 border border-white/15 text-white px-4 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <div className="relative">
+            <input
+              type={show ? "text" : "password"}
+              placeholder="Password"
+              className="w-full h-12 rounded-lg bg-black/40 border border-white/15 text-white px-4 pr-12 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {show ? (
+              <MdOutlineRemoveRedEye
+                className="absolute right-4 top-3.5 text-gray-300 cursor-pointer"
+                onClick={() => setShow(false)}
+              />
+            ) : (
+              <IoEyeOffSharp
+                className="absolute right-4 top-3.5 text-gray-300 cursor-pointer"
+                onClick={() => setShow(true)}
+              />
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full h-12 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-500 transition"
+          >
+            Sign in
+          </button>
+        </form>
+
+        {/* Footer */}
+        <div className="mt-6 text-center text-xs text-gray-500">
+          Secure Admin Access • CartVerse © {new Date().getFullYear()}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

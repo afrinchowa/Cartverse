@@ -1,18 +1,20 @@
-import React from 'react'
-import { createContext } from 'react'
-export const authDataContext =createContext()
-function AuthContext() {
-    const serverUrl = "http://localhost:8000/api/auth  " 
-    const value ={
-serverUrl
-    }
+import React, { createContext } from "react";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const authDataContext = createContext(null);
+
+function AuthContext({ children }) {
+  const serverUrl = "http://localhost:5000";
+
+  const value = {
+    serverUrl,
+  };
+
   return (
-    <div>
-        <authDataContext.Provider value={{value}}>
-            {children}
-        </authDataContext.Provider>
-    </div>
-  )
+    <authDataContext.Provider value={value}>
+      {children}
+    </authDataContext.Provider>
+  );
 }
 
-export default AuthContext
+export default AuthContext;
