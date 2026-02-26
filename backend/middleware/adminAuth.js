@@ -1,20 +1,25 @@
 import React from 'react'
 import jwt from 'jsonwebtoken'
 const adminAuth = async (req, res, next) => {
-  try {
-    // Authentication logic here
-    let token = req.headers.authorization;
+  
+   try{
+const {token} = req.cookies;
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
-    let veryfyToken = jwt.verify(token, process.env.JWT_SECRET);
-    if (!veryfyToken) {
-      return res.status(401).json({ message: "Invalid token" });
+   const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+   if(verifyToken.role !== 'admin'){
+    return res.status(403).json({ message: 'Forbidden' });
+   }    
+   req.adminEmail = process.env.ADMIN_EMAIL;
+   req.user = verifyToken;
+   next();
+   }
+   
+    catch(err){
+        console.error(err);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-    req.user = veryfyToken;
-    next();
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
-  }
 }
+
 export default adminAuth;
