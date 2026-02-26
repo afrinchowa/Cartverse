@@ -1,26 +1,9 @@
-import User from "../model/User.js";
+import express from 'express';
+import isAuth from '../middleware/isAuth.js';
+import {getCurrentUser} from '../controllers/userController.js';
 
-export const getCurrentUser = async (req, res) => {
-  try {
-    const userId = req.user?.id;
+const router = express.Router();
 
-    if (!userId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+userRoutes.get("/getcurrentuser", isAuth, getCurrentUser);
 
-    const user = await User.findById(userId).select("-password");
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    return res.status(200).json(user);
-
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error fetching current user",
-      error: error.message,
-    });
-  }
-};
-export default getCurrentUser;
+export default userRoutes;
