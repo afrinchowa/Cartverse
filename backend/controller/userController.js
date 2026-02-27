@@ -28,10 +28,15 @@ export const getCurrentUser = async (req, res) => {
 };
 export const getAdmin = async (req, res) => {
   try {
-    const adminEmail = req.adminEmail; // injected by adminAuth middleware  
-    return res.status(200).json({ email: adminEmail });
-  } catch (error) {
-    console.error("Error fetching admin:", error);
+    const adminEmail = req.adminEmail; 
+    if(!adminEmail) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    return res.status(200).json({ email: adminEmail ,
+      role:admin
+     });
+  }catch (error) {
+    console.error("Error fetching admin email:", error);
     return res.status(500).json({
       message: "getAdmin error",
       error: error.message,
