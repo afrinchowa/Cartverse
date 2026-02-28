@@ -33,7 +33,7 @@ export const getAdmin = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
     return res.status(200).json({ email: adminEmail ,
-      role:admin
+      role:"admin"
      });
   }catch (error) {
     console.error("Error fetching admin email:", error);
