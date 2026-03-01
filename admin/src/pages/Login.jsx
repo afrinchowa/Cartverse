@@ -4,6 +4,8 @@ import { IoEyeOffSharp } from "react-icons/io5";
 import axios from "axios";
 import Logo from "../assets/logo.png";
 import { authDataContext } from "../context/AuthContext";
+import { adminDataContext } from "../context/AdminContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [show, setShow] = useState(false);
@@ -11,7 +13,9 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const { serverUrl } = useContext(authDataContext);
-
+// eslint-disable-next-line no-unused-vars
+const {adminData , getAdmin} = useContext(adminDataContext);
+const navigate = useNavigate();
   const AdminLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,13 +25,15 @@ function Login() {
         { withCredentials: true }
       );
       console.log(res.data);
+      getAdmin();
+      navigate("/");
     } catch (err) {
       console.error(err.response?.data || err.message);
     }
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
+    <div className="min-h-screen w-full bg-linear-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
       
       <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-8">
 

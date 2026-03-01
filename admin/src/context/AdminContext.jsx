@@ -1,6 +1,6 @@
-import React ,{ useContext , useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { authDataContext } from "./AuthContext";
-import { adminDataContext } from "./AdminContextData";
+
 import axios from "axios";
 
 function AdminContext({ children }) {
@@ -10,23 +10,35 @@ function AdminContext({ children }) {
   const value = {
     adminData,
     setAdminData,
-    serverUrl
+    serverUrl,
   };
   const getadmin = async () => {
     try {
-      const result =await axios.get(serverUrl + "/api/user/getadmin",{withCredentials:true}) 
-      setAdminData(result.data)
-    console.log(result.data)}
-    catch (error) {      console.log(error)
-
+      const result = await axios.get(serverUrl + "/api/user/getadmin", {
+        withCredentials: true,
+      });
+      setAdminData(result.data);
+      console.log(result.data);
+    } catch (error) {
+      setAdminData(null);
+      console.log(error);
     }
-  return (
-    <div>
-      <adminDataContext.Provider value={value}>
-        {children}
-      </adminDataContext.Provider>
-    </div>
-  );
-}
-}
+  };
+  useEffect(() => {
+    getadmin();
+  }, []);
+  const value = {
+    adminData,
+    setAdminData,
+    serverUrl,
+  };
+    return (
+      <div>
+        <adminDataContext.Provider value={value}>
+          {children}
+        </adminDataContext.Provider>
+      </div>
+    );
+  };
+export const adminDataContext = React.createContext();
 export default AdminContext;
