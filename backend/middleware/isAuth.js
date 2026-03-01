@@ -2,24 +2,28 @@ import jwt from "jsonwebtoken";
 
 const isAuth = async (req, res, next) => {
   try {
-    // Authentication logic here
-    let token = req.headers.authorization;
-    if (!token) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
       return res.status(401).json({ message: "No token provided" });
     }
-    let veryfyToken = jwt.verify(token, process.env.JWT_SECRET);
-    if (!veryfyToken) {
-      return res.status(401).json({ message: "Invalid token" });
-    }
 
-    req.userId = veryfyToken.userId;
+    // If you are using "Bearer TOKEN"
+    const token = authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : authHeader;
+
+    const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.user = {
+      id: verifyToken.userId,
+    };
+
     next();
   } catch (error) {
-    console.log("isAuth error")
-    return res.status(401).json({ message: `isAuth error ${error.message}` });
+    console.error("isAuth error:", error.message);
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
-
-module.exports = isAuth;
 
 export default isAuth;
