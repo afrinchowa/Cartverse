@@ -20,7 +20,7 @@ const navigate = useNavigate();
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${serverUrl}/api/auth/adminLogin`,
+        (serverUrl+'/api/auth/adminLogin'),
         { email, password },
         { withCredentials: true }
       );
