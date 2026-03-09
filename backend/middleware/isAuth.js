@@ -12,6 +12,8 @@ const isAuth = (req, res, next) => {
 
     req.user = { id: decoded.userId };
     req.adminEmail = decoded.email || null;
+    req.user = { id: decoded.userId };
+    req.adminEmail = decoded.email || null;
 
     next();
   } catch (error) {
