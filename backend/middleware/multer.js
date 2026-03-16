@@ -4,6 +4,8 @@ let storage = multer.diskStorage({
         cb(null, './public')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname)
+        cb(null, file.originalname)
     }
 })
+let upload = multer({ storage: storage })
+export default upload
