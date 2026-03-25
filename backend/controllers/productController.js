@@ -1,7 +1,11 @@
 export const addProduct = async (req, res) => {
     try {
         const { name, description, price, category, subCategory, sizes,bestSeller } = req.body;
-        const newProduct = new Product({    name, image1, image2, image3, image4, description, price, category, subCategory, sizes });
+        let image1 = await uploadOnCloudinary(req.files.image1[0].path);
+        let image2 = await uploadOnCloudinary(req.files.image2[0].path);
+        let image3 = await uploadOnCloudinary(req.files.image3[0].path);
+        let image4 = await uploadOnCloudinary(req.files.image4[0].path);
+        const newProduct = new Product({    name, description, price, category, subCategory, sizes, bestSeller });
         await newProduct.save();
         res.status(201).json(newProduct);
     } catch (error) {
