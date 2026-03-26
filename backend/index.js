@@ -25,6 +25,7 @@ app.use(
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/product", productRoutes);
 
 // Start server after DB connection
 connectDB()
