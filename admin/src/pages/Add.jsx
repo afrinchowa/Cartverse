@@ -1,30 +1,96 @@
-import React from 'react'
-
+import React from "react";
+import Nav from "../components/Nav";
+import Sidebar from "../components/Sidebar";
+import upload from "../assets/upload.png";
 function Add() {
+  let [image1, setImage1] = useState(false);
+  let [image2, setImage2] = useState(false);
+  let [image3, setImage3] = useState(false);
+  let [image4, setImage4] = useState(false);
   return (
-    <div className='w-100%  min-h-screen bg-linear-to-r from-[#141414] to-[#0c2025] text-white overflow-x-hidden relative'>
-      <Nav/>
-      <Sidebar/>
-      <div className='w-[80%] h-screen absolute top-0 right-0 flex items-center justify-start overflow-x-hidden '>
-
-  <form className='w-full md:w-[90%] h-full bg-[#1a1a1a] mt-17.5  py-15 px[30px] md:px[60px] rounded-lg flex flex-col items-center justify-center gap-7.5'>
-<div>
-  Add Product Page
-  <div>
-    
-    </div>
-</div>
-    <h1 className='text-3xl font-bold'>Add New Product</h1>
-    <input type="text" placeholder='Product Name' className='w-[80%] p-2 rounded-md bg-[#333] text-white focus:outline-none'/>
-    <input type="number" placeholder='Price' className='w-[80%] p-2 rounded-md bg-[#333] text-white focus:outline-none'/>
-    <textarea placeholder='Description' className='w-[80%] p-2 rounded-md bg-[#333] text-white focus:outline-none'></textarea>
-    <button type='submit' className='px-4 py-2 bg-blue-600 rounded-md hover:bg-blue-700 transition duration-300'>Add Product</button>
-  </form>
+    <div className="w-100%  min-h-screen bg-linear-to-r from-[#141414] to-[#0c2025] text-white overflow-x-hidden relative">
+      <Nav />
+      <Sidebar />
+      <div className="w-[80%] h-screen absolute top-0 right-0 flex items-center justify-start overflow-x-hidden ">
+        <form className="w-full md:w-[90%] h-full bg-[#1a1a1a] mt-17.5  py-15 px[30px] md:px[60px] rounded-lg flex flex-col items-center justify-center gap-7.5">
+          <div>
+            Add Product Page
+            <div className="w-[80%] h-[130px] flex items-start justify-center flex-col mt-[20px] gap-[10px] ">
+              <p className="text-20px md:text-25px font-semibold">
+                Upload Image
+              </p>
+              <div className="w-full h-full flex items-center justify-start">
+                <label
+                  htmlFor="image1"
+                  className="w-65px h-65px md:w-100px md:h-100px cursor-pointer hover:border-[#46d1f7]"
+                >
+                  <img
+                    src={!image1 ? upload : URL.createObjectURL(image1)}
+                    alt=""
+                    className="w-[80%] h-[80%]  rounded-lg shadow-2xl hover:border-[#1d1d1d]  border-[2px] object-cover  "
+                  />
+                  <input
+                    type="file"
+                    id="image1"
+                    hidden
+                    onChange={(e) => setImage1(e.target.files[0])}
+                  />
+                </label>
+                <label
+                  htmlFor="image2"
+                  className="w-65px h-65px md:w-100px md:h-100px cursor-pointer hover:border-[#46d1f7]"
+                >
+                  <img
+                    src={!image2 ? upload : URL.createObjectURL(image2)}
+                    alt=""
+                    className="w-[80%] h-[80%]  rounded-lg shadow-2xl hover:border-[#1d1d1d]  border-[2px] object-cover  "
+                  />
+                  <input
+                    type="file"
+                    id="image2"
+                    hidden
+                    onChange={(e) => setImage2(e.target.files[0])}
+                  />
+                </label>
+                <label
+                  htmlFor="image3"
+                  className="w-65px h-65px md:w-100px md:h-100px cursor-pointer hover:border-[#46d1f7]"
+                >
+                  <img
+                    src={!image3 ? upload : URL.createObjectURL(image3)}
+                    alt=""
+                    className="w-[80%] h-[80%]  rounded-lg shadow-2xl hover:border-[#1d1d1d]  border-[2px] object-cover  "
+                  />
+                  <input
+                    type="file"
+                    id="image3"
+                    hidden
+                    onChange={(e) => setImage3(e.target.files[0])}
+                  />
+                </label>
+                <label
+                  htmlFor="image4"
+                  className="w-65px h-65px md:w-100px md:h-100px cursor-pointer hover:border-[#46d1f7]"
+                >
+                  <img
+                    src={!image4 ? upload : URL.createObjectURL(image4)}
+                    alt=""
+                    className="w-[80%] h-[80%]  rounded-lg shadow-2xl hover:border-[#1d1d1d]  border-[2px] object-cover  "
+                  />
+                  <input
+                    type="file"
+                    id="image4"
+                    hidden
+                    onChange={(e) => setImage4(e.target.files[0])}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-
-
     </div>
-  )
+  );
 }
 
-export default Add
+export default Add;
