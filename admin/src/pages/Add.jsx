@@ -97,12 +97,23 @@ function Add() {
             />
           </div>
           <div className="w-[80%]  flex items-start justify-center flex-col gap-2.5 ">
-            <p className="text-20px md:text-25px font-semibold">Product Description</p>
+            <p className="text-20px md:text-25px font-semibold">
+              Product Description
+            </p>
             <input
               type="text"
               placeholder="Type here"
-              className="w-600px max-w-98% h-40px rounded-lg hover:border-[#46d1f7] border-2px cursor-pointer bg-slate-600 px-20px text-18px placeholder:text-[#ffffffc2"
+              className="w-600px max-w-98% h-40px rounded-lg hover:border-[#46d1f7] border-[2px] cursor-pointer bg-slate-600 px-[20px] py-[10px] text-18px placeholder:text-[#ffffffc2"
             />
+          </div>
+
+          <div className="md:w-[80%] flex items-center gap-5 flex-wrap">
+            <div className="md:w-[30%] w-full flex items-start sm:justify-center flex-col gap-[10px]">
+              <p className="text-[20px] md:text-[25px] font-semibold w-100%  ">
+              
+                Product Category
+              </p>
+            </div>
           </div>
         </form>
       </div>
