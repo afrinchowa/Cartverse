@@ -160,7 +160,11 @@ function Add() {
             />
           </div>
           <div className="flex items-center justify-start gap-2.5 flext-wrap">
-            <div className="px-20px py-7px">S</div>
+            <div className={`px-[20px] py-[7px] rounded-lg bg-slate-600 text-[18px] hover:border-[#46f1f7 border[2px] cursor-pointer $sizes.includes("S")? "bg-green-200 text-black border-[#46d1f7] " : ""`} onClick={()=>setSizes(prev=>prev.includes("S")?  prev.filter(item => item!== "S") : [...prev,"S"])}>S</div>
+            <div className="px-[20px] py-[7px] rounded-lg bg-slate-600 text-[18px] hover:border-[#46f1f7 border[2px] cursor-pointer" onClick={()=>setSizes(prev=>prev.includes("M")? prev.filter(item => item!== "M") : [...prev,"M"])}>M</div>
+            <div className="px-[20px] py-[7px] rounded-lg bg-slate-600 text-[18px] hover:border-[#46f1f7 border[2px] cursor-pointer" onClick={()=>setSizes(prev=>prev.includes("L")? prev.filter(item => item!== "L") : [...prev,"L"])}>L</div>
+            <div className="px-[20px] py-[7px] rounded-lg bg-slate-600 text-[18px] hover:border-[#46f1f7 border[2px] cursor-pointer" onClick={()=>setSizes(prev=>prev.includes("XL")? prev.filter(item => item!== "XL") : [...prev,"XL"])}>XL</div>
+            <div className="px-[20px] py-[7px] rounded-lg bg-slate-600 text-[18px] hover:border-[#46f1f7 border[2px] cursor-pointer" onClick={()=>setSizes(prev=>prev.includes("XXL")? prev.filter(item => item!== "XXL") : [...prev,"XXL"])}>XXL</div>
           </div>
         </form>
       </div>
