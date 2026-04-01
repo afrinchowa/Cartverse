@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "../components/Nav";
 import Sidebar from "../components/Sidebar";
 import upload from "../assets/upload.png";
@@ -7,6 +7,14 @@ function Add() {
   let [image2, setImage2] = useState(false);
   let [image3, setImage3] = useState(false);
   let [image4, setImage4] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("Men");
+  const [subCategory, setSubCategory] = useState("TopWear");
+  const [price, setPrice] = useState("");
+  const [bestSeller, setBestSeller] = useState(false);
+  const [sizes, setSizes] = useState([]);
+
   return (
     <div className="w-100%  min-h-screen bg-linear-to-r from-[#141414] to-[#0c2025] text-white overflow-x-hidden relative">
       <Nav />
@@ -103,17 +111,56 @@ function Add() {
             <input
               type="text"
               placeholder="Type here"
-              className="w-600px max-w-98% h-40px rounded-lg hover:border-[#46d1f7] border-[2px] cursor-pointer bg-slate-600 px-[20px] py-[10px] text-18px placeholder:text-[#ffffffc2"
+              className="w-600px max-w-98% h-40px rounded-lg hover:border-[#46d1f7] border-2 cursor-pointer bg-slate-600 px-5 py-2.5 text-18px placeholder:text-[#ffffffc2"
             />
           </div>
 
           <div className="md:w-[80%] flex items-center gap-5 flex-wrap">
             <div className="md:w-[30%] w-full flex items-start sm:justify-center flex-col gap-[10px]">
               <p className="text-[20px] md:text-[25px] font-semibold w-100%  ">
-              
                 Product Category
               </p>
+              <select
+                name=""
+                id=""
+                className="bg-slate-600 w-60% px-10px py-7px rounded-lg hover:border-[#46d1f7] border-2px"
+              >
+                <option value="">Select a category</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+              </select>
             </div>
+          </div>
+          <div className="md:w-[80%] flex items-center gap-5 flex-wrap">
+            <div className="md:w-[30%] w-full flex items-start sm:justify-center flex-col gap-[10px]">
+              <p className="text-[20px] md:text-[25px] font-semibold w-100%  ">
+                Sub-Category
+              </p>
+              <select
+                name=""
+                id=""
+                className="bg-slate-600 w-60% px-10px py-7px rounded-lg hover:border-[#46d1f7] border-2px"
+              >
+                <option value="">Select a category</option>
+                <option value="TopWear">Top Wear</option>
+                <option value="BottomWear">Bottom Wear</option>
+                <option value="Winterwear">Winter Wear</option>
+              </select>
+            </div>
+          </div>
+          <div className="w-[80%]  flex items-start justify-center flex-col gap-2.5 ">
+            <p className="text-20px md:text-25px font-semibold">
+              Product Price
+            </p>
+            <input
+              type="number"
+              placeholder="$2000"
+              className="w-600px max-w-98% h-40px rounded-lg hover:border-[#46d1f7] border-2 cursor-pointer bg-slate-600 px-5 py-2.5 text-18px placeholder:text-[#ffffffc2"
+            />
+          </div>
+          <div className="flex items-center justify-start gap-2.5 flext-wrap">
+            <div className="px-20px py-7px">S</div>
           </div>
         </form>
       </div>
