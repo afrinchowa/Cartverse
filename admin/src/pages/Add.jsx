@@ -230,6 +230,9 @@ function Add() {
           <button className="w-[140px] px-20px py-20px rounded-xl bg-[65d8f7] flex items-center gap-10px text-black active:bg-slate-700 active:text-white active:border-[2px]">
             Add Product
           </button>
+          <button className="w-[140px] px-20px py-20px rounded-xl bg-[65d8f7] flex items-center gap-10px text-black active:bg-slate-700 active:text-white active:border-[2px]">
+            Add Product
+          </button>
         </form>
       </div>
     </div>
