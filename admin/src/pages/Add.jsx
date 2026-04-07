@@ -25,11 +25,7 @@ function Add() {
     formData.append("subCategory", subCategory);
     formData.append("price", price);
     formData.append("bestSeller", bestSeller);
-    sizes.forEach((size) => formData.append("sizes[]", size));
-    if (image1) formData.append("images", image1);
-    if (image2) formData.append("images", image2);
-    if (image3) formData.append("images", image3);
-    if (image4) formData.append("images", image4);
+
 
 
   return (
