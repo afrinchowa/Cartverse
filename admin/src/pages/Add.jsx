@@ -15,12 +15,29 @@ function Add() {
   const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([]);
 
+  const handleAddProduct =async (e) => {
+    e.preventDefault();
+    // Create a FormData object to hold the product data
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("subCategory", subCategory);
+    formData.append("price", price);
+    formData.append("bestSeller", bestSeller);
+    sizes.forEach((size) => formData.append("sizes[]", size));
+    if (image1) formData.append("images", image1);
+    if (image2) formData.append("images", image2);
+    if (image3) formData.append("images", image3);
+    if (image4) formData.append("images", image4);
+
+
   return (
     <div className="w-100%  min-h-screen bg-linear-to-r from-[#141414] to-[#0c2025] text-white overflow-x-hidden relative">
       <Nav />
       <Sidebar />
-      <div className="w-[80%] h-screen absolute top-0 right-0 flex items-center justify-start overflow-x-hidden ">
-        <form className="w-full md:w-[90%] h-full bg-[#1a1a1a] mt-17.5  py-15 px[30px] md:px[60px] rounded-lg flex flex-col items-center justify-center gap-7.5">
+      <div className="w-[80%] h-screen absolute top-0 right-0 flex items-center justify-start overflow-x-hidden bottom-[5%] ">
+        <form onSubmit={handleAddProduct} className="w-full md:w-[90%] h-full bg-[#1a1a1a] mt-17.5  py-15 px[30px] md:px[60px] rounded-lg flex flex-col items-center justify-center gap-7.5">
           <div>
             Add Product Page
             <div className="w-[80%] h-[130px] flex items-start justify-center flex-col mt-[20px] gap-[10px] ">
@@ -227,12 +244,10 @@ function Add() {
             </div>
           </div>
 
-          <button className="w-[140px] px-20px py-20px rounded-xl bg-[65d8f7] flex items-center gap-10px text-black active:bg-slate-700 active:text-white active:border-[2px]">
+          <button className="w-[140px] px-20px py-20px rounded-xl bg-[65d8f7] flex items-center gap-10px text-black active:bg-slate-700 active:text-white active:border-[2px] border-white ">
             Add Product
           </button>
-          <button className="w-[140px] px-20px py-20px rounded-xl bg-[65d8f7] flex items-center gap-10px text-black active:bg-slate-700 active:text-white active:border-[2px]">
-            Add Product
-          </button>
+        
         </form>
       </div>
     </div>
