@@ -238,7 +238,7 @@ function Add() {
               XXL
             </div>
             <div className="w-80% flex items-center justify-start gap-10px mt-20px ">
-              <input type="checkbox" id="checkbox" className="w-[25px] h-[25px] cursor-pointer"  />
+              <input type="checkbox" id="checkbox" className="w-[25px] h-[25px] cursor-pointer" onChange={() =>setBestSeller()}  />
             <label htmlFor="checkbox" className="text-[18px] md:text-[22px] font-semibold"></label>
             Add to Best Sellers
             </div>
