@@ -25,6 +25,12 @@ function Add() {
     formData.append("subCategory", subCategory);
     formData.append("price", price);
     formData.append("bestSeller", bestSeller);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("subCategory", subCategory);
+    formData.append("price", price);
+    formData.append("bestSeller", bestSeller);
 
 
 
