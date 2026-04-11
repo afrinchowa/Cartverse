@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Nav from "../components/Nav";
 import Sidebar from "../components/Sidebar";
 import upload from "../assets/upload.png";
@@ -14,10 +14,12 @@ function Add() {
   const [price, setPrice] = useState("");
   const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([]);
-
+let {serverUrl} = useContext(authDataContext);
+const [loading, setLoading] = useState(false);
   const handleAddProduct =async (e) => {
     e.preventDefault();
-    // Create a FormData object to hold the product data
+try{
+ // Create a FormData object to hold the product data
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
@@ -25,7 +27,16 @@ function Add() {
     formData.append("subCategory", subCategory);
     formData.append("price", price);
     formData.append("bestSeller", bestSeller);
-    sizes.forEach((size) => formData.append("sizes[]", size));
+formData.append("sized", JSON.stringify(sizes));
+    formData.append("image1", image1);
+    formData.append("image2", image2);
+    formData.append("image3", image3);
+    formData.append("image4", image4);
+}
+catch(err){
+  console.error("Error adding product:", err);
+}
+   
 
 
 
@@ -235,7 +246,7 @@ function Add() {
               XXL
             </div>
             <div className="w-80% flex items-center justify-start gap-10px mt-20px ">
-              <input type="checkbox" id="checkbox" className="w-[25px] h-[25px] cursor-pointer" onChange={() =>setBestSeller()}  />
+              <input type="checkbox" id="checkbox" className="w-[25px] h-[25px] cursor-pointer" onChange={() =>setBestSeller(prev => !prev)}  />
             <label htmlFor="checkbox" className="text-[18px] md:text-[22px] font-semibold"></label>
             Add to Best Sellers
             </div>
@@ -250,5 +261,5 @@ function Add() {
     </div>
   );
 }
-
+}
 export default Add;
