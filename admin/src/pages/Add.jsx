@@ -35,6 +35,8 @@ formData.append("sized", JSON.stringify(sizes));
 }
 catch(err){
   console.error("Error adding product:", err);
+  setLoading(false);
+  
 }
    
 
