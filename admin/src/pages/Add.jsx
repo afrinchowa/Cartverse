@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import Nav from "../components/Nav";
 import Sidebar from "../components/Sidebar";
 import upload from "../assets/upload.png";
+import axios from "axios";
+import { authDataContext } from "../context/AuthContext";
 function Add() {
   let [image1, setImage1] = useState(false);
   let [image2, setImage2] = useState(false);
@@ -32,6 +34,12 @@ formData.append("sized", JSON.stringify(sizes));
     formData.append("image2", image2);
     formData.append("image3", image3);
     formData.append("image4", image4);
+    let result = await axios.post(`${serverUrl}/products/addproduct`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("Product added successfully:", result.data);
 }
 catch(err){
   console.error("Error adding product:", err);
