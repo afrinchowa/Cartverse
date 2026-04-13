@@ -34,12 +34,24 @@ formData.append("sized", JSON.stringify(sizes));
     formData.append("image2", image2);
     formData.append("image3", image3);
     formData.append("image4", image4);
-    let result = await axios.post(`${serverUrl}/products/addproduct`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    let result = await axios.post(serverUrl + "/api/products/addproduct", formData, {
+      withCredentials: true,
     });
     console.log("Product added successfully:", result.data);
+    if(result.data){
+  setImage1(false);
+  setImage2(false);
+  setImage3(false);
+  setImage4(false);
+  setName("");
+  setDescription("");
+  setCategory("Men");
+  setSubCategory("TopWear");
+  setPrice("");
+  setBestSeller(false);
+  setSizes([]);
+  
+    }
 }
 catch(err){
   console.error("Error adding product:", err);
