@@ -56,4 +56,12 @@ export const listProduct = async (req,res) =>{
     return res.status(500).json({ message: `List Product error ${error}` });
   }
 }
-
+export const removeProduct = async (req,res) =>{
+  try{
+    const {id} = req.params;
+    const product = await Product.findByIdAndDelete(id);
+    return res.status(200).json({message:"Product removed successfully", product})
+  }catch(error){
+    console.log("Remove Product Error")
+    return res.status(500).json({ message: `Remove Product error ${error}` });
+  }
