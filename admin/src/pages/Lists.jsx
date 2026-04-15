@@ -1,7 +1,20 @@
 import React from 'react'
 
 function Lists() {
-
+  let [list,setList] = useState([])
+  let {serverUrl} = useContext(Context)
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const {data} = await axios.get(`${serverUrl}/api/products/list`)
+        setList(data)
+      }catch(error){
+        console.log("Fetch List Error")
+        console.log(error)
+      }
+    }
+    fetchData()
+  },[])
   return (
     <div className='w-screen min-h-screen bg-gradient-to-1from[#141414]to-[#0c2025] text-white flex items-center justify-center'>
 <Nav/>
