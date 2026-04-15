@@ -65,3 +65,6 @@ export const removeProduct = async (req,res) =>{
     console.log("Remove Product Error")
     return res.status(500).json({ message: `Remove Product error ${error}` });
   }
+}
+
+
