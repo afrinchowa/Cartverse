@@ -29,20 +29,11 @@ All listed products
 </div>
 {
   list?list.length >0 (
-    list.map((item,index)=>{
-      return(
-        <div key={index} className='w-full h-[80%] bg-[#1c1c1c] rounded-lg flex items-center justify-between px-5 py-3'>
-          <div className='flex items-center gap-5'>
-            <img src={item.image} alt={item.name} className='w-20 h-20 rounded-lg object-cover'/>
-            <div className='flex flex-col gap-1'>
-              <div className='text-[18px] font-semibold'>{item.name}</div>
-              <div className='text-[14px] text-gray-400'>{item.category}</div>
-            </div>
-          </div>
-          <div className='text-[18px] font-semibold'>${item.price}</div>
-        </div>
-      )
-    })
+    list.map((item,index)=>(
+      <div className='w-90% md:h-120px h-90px bg-slate-600 rounded-xl flex items-center justify-start gap-5px md:gap-30px p-10px md:px-30px ' key={index}>
+
+      </div>
+    ))
   )
   :
   (
