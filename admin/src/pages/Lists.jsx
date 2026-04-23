@@ -42,9 +42,7 @@ function Lists() {
             <div className="w-full h-[80%] bg-[#1c1c1c] rounded-lg flex items-center justify-center text-[20px] text-gray-400">
               No products listed yet
             </div>
-            <div className="w-full h-[80%] bg-[#1c1c1c] rounded-lg flex items-center justify-center text-[20px] text-gray-400">
-              No products listed yet
-            </div>
+         
           )}
         </div>
       </div>
