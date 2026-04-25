@@ -35,7 +35,14 @@ function Lists() {
                 <div
                   className="w-90% md:h-120px h-90px bg-slate-600 rounded-xl flex items-center justify-start gap-5px md:gap-30px p-10px md:px-30px "
                   key={index}
-                ></div>
+                >
+                  <img
+                    src={item.image1}
+                    alt={item.name}
+                    className="w-30% md:w-120px h-90% md:h-24 object-cover rounded-lg"
+                  />  
+
+                </div>
               )),
             )
           ) : (
