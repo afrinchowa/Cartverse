@@ -41,7 +41,14 @@ function Lists() {
                     alt={item.name}
                     className="w-30% md:w-120px h-90% md:h-24 object-cover rounded-lg"
                   />  
-
+<div className="w-[90%] h-[80%] flex flex-col items-start justify-center gap-2px">
+<div className="w-full md:text-20px txt-15px text-[#bef0f3] ">
+{item.name}
+</div>
+<div className="w-full md:text-16px txt-12px text-gray-400">
+{item.category}
+</div>
+</div>
                 </div>
               ))
             
