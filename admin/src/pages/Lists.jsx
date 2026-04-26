@@ -28,9 +28,9 @@ function Lists() {
           <div className="w-100 h-12.5 text-[28px] md:text-[40px] mb-[20px] text-white">
             All listed products
           </div>
-          {list ? (
-            list.length >
-            0(
+          {
+          list ?.length > 0 ? (
+            
               list.map((item, index) => (
                 <div
                   className="w-90% md:h-120px h-90px bg-slate-600 rounded-xl flex items-center justify-start gap-5px md:gap-30px p-10px md:px-30px "
@@ -43,8 +43,8 @@ function Lists() {
                   />  
 
                 </div>
-              )),
-            )
+              ))
+            
           ) : (
             <div className="w-full h-[80%] bg-[#1c1c1c] rounded-lg flex items-center justify-center text-[20px] text-gray-400">
               No products listed yet
