@@ -48,6 +48,9 @@ function Lists() {
 <div className="w-full md:text-16px txt-12px text-gray-400">
 {item.category}
 </div>
+<div className="w-full md:text-16px txt-12px text-gray-400">
+{item.price}
+</div>
 </div>
                 </div>
               ))
