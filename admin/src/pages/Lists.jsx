@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 function Lists() {
   let [list, setList] = useState([]);
@@ -15,6 +15,9 @@ function Lists() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    fetchList();
+  }, []);
   useEffect(() => {
     fetchList();
   }, []);
