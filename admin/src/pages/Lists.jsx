@@ -18,9 +18,6 @@ function Lists() {
   useEffect(() => {
     fetchList();
   }, []);
-  useEffect(() => {
-    fetchList();
-  }, []);
 
   return (
     <div className="w-screen min-h-screen bg-gradient-to-1from[#141414]to-[#0c2025] text-white flex items-center justify-center">
