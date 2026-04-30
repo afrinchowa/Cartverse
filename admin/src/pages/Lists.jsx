@@ -49,7 +49,10 @@ function Lists() {
 {item.category}
 </div>
 <div className="w-full md:text-16px txt-12px text-gray-400">
-{item.price}
+${item.price}
+</div>
+<div className="w-10% h-full bg-transparent flex items-center justify-center">
+  <span className="">X</span>
 </div>
 </div>
                 </div>
