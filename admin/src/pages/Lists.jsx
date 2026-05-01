@@ -15,7 +15,23 @@ function Lists() {
       console.log(error);
     }
   };
+
+  const removeList = async(id)=>{
+    try {
+      let result = await axios.post( `${serverUrl}/api/product/remove/${id}`,{},
+        { withCredentials: true });
+        if(result.data === "Product removed successfully"){
+          fetchList();
+        }else{          alert("Failed to remove product");
+        }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchList();
   }, []);
 
