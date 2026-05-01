@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import { authDataContext } from "../context/AuthContext";
+import axios from "axios";
 
 function Lists() {
   let [list, setList] = useState([]);
@@ -6,9 +8,7 @@ function Lists() {
 
   const fetchList = async () => {
     try {
-      let res = await fetch({ serverUrl } + "/api/product/list");
-      setList(result.data);
-      let data = await res.json();
+      let result = await axios.get( serverUrl + "/api/product/list");
       setList(result.data);
       console.log(result.data);
     } catch (error) {
