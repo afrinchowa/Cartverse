@@ -1,24 +1,59 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { CiCircleList } from "react-icons/ci";
 import { TiTickOutline } from "react-icons/ti";
-import { navigate } from "react-router-dom";
+
 function Sidebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const menu = [
+    {
+      name: "Add Items",
+      path: "/add",
+      icon: <IoMdAddCircleOutline />,
+    },
+    {
+      name: "List Items",
+      path: "/list",
+      icon: <CiCircleList />,
+    },
+    {
+      name: "Orders",
+      path: "/orders",
+      icon: <TiTickOutline />,
+    },
+  ];
+
   return (
-    <div className="w-18% min-h-100vh border-r-[1px] py-[60px] fixed left-0 top-0">
-      <div className="flex flex-col gap-4 pt-40px pl-20% text-15px">
-        <div className="flex items-center justify-center md:justify-start gap-3 border border-grey-200 border-r-0 px-3 py-2 cursor-pointer hover:bg-[#2c7b89]  " onClick={()=>navigate('/add')}>
-          <IoMdAddCircleOutline className="h-20px w-20px " />
-          <p className="hidden md:block">Add Items</p>
-        </div>
-        <div className="flex items-center justify-center md:justify-start gap-3 border border-grey-200 border-r-0 px-3 py-2 cursor-pointer hover:bg-[#2c7b89] " onClick={()=>navigate('/list')}>
-          <CiCircleList className="h-20px w-20px " />
-          <p className="hidden md:block">List Items</p>
-        </div>
-        <div className="flex items-center justify-center md:justify-start gap-3 border border-grey-200 border-r-0 px-3 py-2 cursor-pointer hover:bg-[#2c7b89] " onClick={()=>navigate('/orders')}>
-          <TiTickOutline className="h-20px w-20px " />
-          <p className="hidden md:block">Orders</p>
-        </div>
+    <div className="w-[18%] min-h-screen border-r border-gray-800 py-[60px] fixed left-0 top-0 bg-[#0f0f0f]">
+
+      <div className="flex flex-col gap-3 px-4 text-[15px]">
+
+        {menu.map((item) => {
+          const isActive = location.pathname === item.path;
+
+          return (
+            <div
+              key={item.path}
+              onClick={() => navigate(item.path)}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition
+                ${
+                  isActive
+                    ? "bg-cyan-500 text-black"
+                    : "hover:bg-[#1f2a2e] text-white"
+                }`}
+            >
+              <span className="text-lg">{item.icon}</span>
+
+              <p className="hidden md:block font-medium">
+                {item.name}
+              </p>
+            </div>
+          );
+        })}
+
       </div>
     </div>
   );

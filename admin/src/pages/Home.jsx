@@ -5,44 +5,76 @@ import { FaArrowRight } from "react-icons/fa";
 
 function Home() {
   return (
-    <>
-      <div className="w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#111827] to-[#0c2025] text-white relative overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#0b1220] to-[#0c2025] text-white relative overflow-hidden">
 
-        {/* Navigation */}
-        <Nav />
-        <Sidebar />
+      {/* Sidebar + Nav */}
+      <Sidebar />
+      <Nav />
 
-        {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center text-center px-6 pt-32 pb-20">
+      {/* Background Glow */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-purple-500/20 blur-[120px] rounded-full"></div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide leading-tight">
-            Build Your <span className="text-cyan-400">Digital Future</span>
+      {/* Main Content */}
+      <div className="ml-[18%] flex items-center justify-center min-h-screen px-6">
+
+        <div className="text-center max-w-4xl">
+
+          {/* Badge */}
+          <div className="inline-block px-4 py-1 rounded-full border border-cyan-500/40 text-cyan-300 text-sm mb-6">
+            Admin Dashboard v1.0
+          </div>
+
+          {/* Heading */}
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            Build Your{" "}
+            <span className="text-cyan-400">Digital Commerce Engine</span>
           </h1>
 
-          <p className="mt-6 text-gray-300 max-w-2xl text-sm sm:text-base md:text-lg">
-            A modern platform designed to simplify your workflow and help you
-            manage everything efficiently. Experience speed, design, and
-            productivity in one place.
+          {/* Subtitle */}
+          <p className="mt-6 text-gray-300 text-sm md:text-lg leading-relaxed">
+            A scalable admin system designed for modern product management,
+            inventory control, and real-time business operations.
+            Built for performance, clarity, and operational efficiency.
           </p>
 
-          {/* Buttons */}
-          <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <button className="bg-cyan-500 hover:bg-cyan-600 transition px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+          {/* CTA Buttons */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+            <button className="bg-cyan-500 hover:bg-cyan-600 transition px-7 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-cyan-500/20">
               Get Started <FaArrowRight />
             </button>
 
-            <button className="border border-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition px-6 py-3 rounded-xl font-semibold">
+            <button className="border border-gray-600 hover:border-cyan-400 hover:text-cyan-300 transition px-7 py-3 rounded-xl font-semibold">
               Learn More
             </button>
+
           </div>
+
+          {/* Stats Row */}
+          <div className="mt-14 grid grid-cols-3 gap-6 text-center text-gray-300">
+
+            <div>
+              <h3 className="text-2xl font-bold text-white">99.9%</h3>
+              <p className="text-sm">Uptime</p>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold text-white">Fast</h3>
+              <p className="text-sm">Performance</p>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold text-white">Secure</h3>
+              <p className="text-sm">Architecture</p>
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Decorative background glow */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 blur-3xl rounded-full"></div>
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-purple-500/20 blur-3xl rounded-full"></div>
-
       </div>
-    </>
+    </div>
   );
 }
 

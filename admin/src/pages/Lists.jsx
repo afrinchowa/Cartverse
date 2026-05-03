@@ -1,86 +1,109 @@
 import React, { useContext, useEffect, useState } from "react";
-import { authDataContext } from "../context/AuthContext";
+import Nav from "../component/Nav";
+import Sidebar from "../component/Sidebar";
 import axios from "axios";
+import { authDataContext } from "../context/AuthContext";
 
 function Lists() {
-  let [list, setList] = useState([]);
-  let { serverUrl } = useContext(authDataContext);
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const { serverUrl } = useContext(authDataContext);
 
   const fetchList = async () => {
     try {
-      let result = await axios.get( serverUrl + "/api/product/list");
+      setLoading(true);
+      const result = await axios.get(serverUrl + "/api/products/list");
       setList(result.data);
-      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeList = async (id) => {
+    try {
+      const result = await axios.post(
+        `${serverUrl}/api/products/remove/${id}`,
+        {},
+        { withCredentials: true }
+      );
+
+      if (result.data?.success) {
+        fetchList();
+      } else {
+        alert("Failed to remove product");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const removeList = async(id)=>{
-    try {
-      let result = await axios.post( `${serverUrl}/api/product/remove/${id}`,{},
-        { withCredentials: true });
-        if(result.data === "Product removed successfully"){
-          fetchList();
-        }else{          alert("Failed to remove product");
-        }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchList();
   }, []);
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-1from[#141414]to-[#0c2025] text-white flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#111827] to-[#0c2025] text-white">
+
+      <Sidebar />
       <Nav />
-      <div className="w-100% h-100% flex items-center justify-start">
-        <Sidebar />
-        <div className="w-[82%] h-full lg:md-[320px] md:ml-57.5 mt-17.5 flex flex-col gap-7.5 overflow-x-hidden py-12.5 ml-25">
-          <div className="w-100 h-12.5 text-[28px] md:text-[40px] mb-[20px] text-white">
-            All listed products
-          </div>
-          {
-          list ?.length > 0 ? (
-            
-              list.map((item, index) => (
-                <div
-                  className="w-90% md:h-120px h-90px bg-slate-600 rounded-xl flex items-center justify-start gap-5px md:gap-30px p-10px md:px-30px "
-                  key={index}
-                >
+
+      <div className="ml-[18%] pt-24 px-6 md:px-10">
+
+        {/* Header */}
+        <h1 className="text-2xl md:text-4xl font-semibold mb-8">
+          Product Inventory
+        </h1>
+
+        {/* Content */}
+        {loading ? (
+          <div className="text-gray-400">Loading products...</div>
+        ) : list.length > 0 ? (
+          <div className="space-y-4">
+
+            {list.map((item) => (
+              <div
+                key={item._id}
+                className="flex items-center justify-between bg-[#1a1a1a] p-4 rounded-xl border border-gray-800 hover:border-cyan-500 transition"
+              >
+
+                {/* Product Info */}
+                <div className="flex items-center gap-4">
+
                   <img
                     src={item.image1}
                     alt={item.name}
-                    className="w-30% md:w-120px h-90% md:h-24 object-cover rounded-lg"
-                  />  
-<div className="w-[90%] h-[80%] flex flex-col items-start justify-center gap-2px">
-<div className="w-full md:text-20px txt-15px text-[#bef0f3] ">
-{item.name}
-</div>
-<div className="w-full md:text-16px txt-12px text-gray-400">
-{item.category}
-</div>
-<div className="w-full md:text-16px txt-12px text-gray-400">
-${item.price}
-</div>
-<div className="w-10% h-full bg-transparent flex items-center justify-center">
-  <span className="w-35px h-30% flex items-center justify-center rounded-md md:hover:bg-red-300 md:hover:text-black cursor-pointer hover:text-red-300" onClick={()=>removeList(item._id)}>X</span>
-</div>
-</div>
+                    className="w-16 h-16 object-cover rounded-lg"
+                  />
+
+                  <div>
+                    <h2 className="text-lg font-medium">{item.name}</h2>
+                    <p className="text-sm text-gray-400">{item.category}</p>
+                    <p className="text-sm text-cyan-400">${item.price}</p>
+                  </div>
+
                 </div>
-              ))
-            
-          ) : (
-            <div className="w-full h-[80%] bg-[#1c1c1c] rounded-lg flex items-center justify-center text-[20px] text-gray-400">
-              No products listed yet
-            </div>
-         
-          )}
-        </div>
+
+                {/* Delete */}
+                <button
+                  onClick={() => removeList(item._id)}
+                  className="px-4 py-2 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded-lg transition"
+                >
+                  Delete
+                </button>
+
+              </div>
+            ))}
+
+          </div>
+        ) : (
+          <div className="text-gray-400 text-center mt-20">
+            No products available
+          </div>
+        )}
+
       </div>
     </div>
   );
