@@ -68,7 +68,7 @@ function Lists() {
 ${item.price}
 </div>
 <div className="w-10% h-full bg-transparent flex items-center justify-center">
-  <span className="w-35px h-30% flex items-center justify-center rounded-md md:hover:bg-red-300 md:hover:text-black cursor-pointer hover:text-red-300">X</span>
+  <span className="w-35px h-30% flex items-center justify-center rounded-md md:hover:bg-red-300 md:hover:text-black cursor-pointer hover:text-red-300" onClick={()=>removeList(item._id)}>X</span>
 </div>
 </div>
                 </div>
