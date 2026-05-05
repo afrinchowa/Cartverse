@@ -24,6 +24,17 @@ function Sidebar() {
       path: "/orders",
       icon: <TiTickOutline />,
     },
+    {
+      name: "Orders",
+      path: "/orders",
+      icon: <TiTickOutline />,
+    },
+    {
+      name: "Orders",
+      path: "/orders",
+      icon: <TiTickOutline />,
+    },
+
   ];
 
   return (
