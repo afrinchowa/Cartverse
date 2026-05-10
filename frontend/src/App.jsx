@@ -9,13 +9,13 @@ import AuthContext from "./context/AuthContext";
 import Collections from "./pages/Collections";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+function App() {
+  let { userData } = React.useContext(UserContext);
 const App = () => {
   return (
-    <UserContext>
-      <AuthContext>
-        <Nav />
-        <Routes>
+   <>
+   { userData && <Nav/>}
+    <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Registration />} />
@@ -23,9 +23,10 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </AuthContext>
-    </UserContext>
+   </>
+       
+    
   );
 };
-
+}
 export default App;
