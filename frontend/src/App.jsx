@@ -6,6 +6,9 @@ import { Route, Routes } from "react-router-dom";
 import Nav from "./component/Nav";
 import UserContext from "./context/UserContext";
 import AuthContext from "./context/AuthContext";
+import Collections from "./pages/Collections";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
@@ -16,6 +19,9 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Registration />} />
+          <Route path="/collections" element={<Collections />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </AuthContext>
     </UserContext>
