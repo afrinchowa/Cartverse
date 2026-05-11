@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Nav from "./component/Nav";
 import UserContext from "./context/UserContext";
 import AuthContext from "./context/AuthContext";
@@ -11,11 +11,18 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 function App() {
   let { userData } = React.useContext(UserContext);
+  let location =useLocation()
 const App = () => {
   return (
    <>
    { userData && <Nav/>}
     <Routes>
+      <Route path="/login" element={
+userData? (<Navigate to={location.state?.from || "/"} />) : (<Login />)
+      } />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Registration />} />
+
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Registration />} />

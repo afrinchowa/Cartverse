@@ -67,6 +67,7 @@ function Home() {
             <div>
               <h3 className="text-2xl font-bold text-white">Secure</h3>
               <p className="text-sm">Architecture</p>
+              
             </div>
 
           </div>
