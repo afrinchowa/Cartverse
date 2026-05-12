@@ -95,3 +95,24 @@ function Product() {
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
+ return (
+    <div className="bg-gray-50 min-h-screen">
+      {/* Hero Section */}
+      <div className="relative h-[350px]">
+        <img
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80"
+          alt="Products Banner"
+          className="w-full h-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-5">
+          <h1 className="text-5xl font-bold text-white mb-4">
+            Our Products
+          </h1>
+
+          <p className="text-gray-200 text-lg max-w-2xl">
+            Explore premium quality fashion products designed for
+            comfort, elegance, and modern lifestyle.
+          </p>
+        </div>
+      </div>
