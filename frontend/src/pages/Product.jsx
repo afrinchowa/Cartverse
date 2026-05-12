@@ -116,3 +116,12 @@ function Product() {
           </p>
         </div>
       </div>
+         {/* Search & Filter */}
+      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-5 items-center justify-between">
+        {/* Search */}
+        <div className="relative w-full md:w-[400px]">
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            size={18}
+          />
+          
