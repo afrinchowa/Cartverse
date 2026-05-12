@@ -72,8 +72,26 @@ function Product() {
       image:
         "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
     },
-    </div>
-  )
-}
+    {
+      id: 7,
+      name: "Elegant Sunglasses",
+      price: "$55",
+      category: "Accessories",
+      rating: 4.5,
+      image:
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+    },
+    {
+      id: 8,
+      name: "Denim Blue Jeans",
+      price: "$90",
+      category: "Jeans",
+      rating: 4.7,
+      image:
+        "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
+    },
+  ];
 
-export default Product
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
