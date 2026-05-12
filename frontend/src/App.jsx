@@ -22,17 +22,19 @@ userData? (<Navigate to={location.state?.from || "/"} />) : (<Login />)
       } />
      
       <Route path="/signup" element={
-       userData? (<Navigate to={location.state?.from || "/"} />) : (<Login />)
+       userData? (<Navigate to={location.state?.from || "/"} />) : (<Registration />)
       } />
       
    
 
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Registration />} />
+          <Route path="/" element={userData? <><Home /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
+
           <Route path="/collections" element={<Collections />} />
+
           <Route path="/about" element={<About />} />
+
           <Route path="/contact" element={<Contact />} />
+
         </Routes>
    </>
        
