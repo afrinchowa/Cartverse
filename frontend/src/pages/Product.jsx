@@ -173,8 +173,8 @@ function Product() {
                   <h2 className="text-lg font-semibold text-gray-800">
                     {product.name}
                   </h2>
-<div>
-  <Star/>
+<div className='flex items-center gap-1 text-yellow-500'>
+  <Star size={16} fill="currentColor" />
   <span>
     {product.rating}
   </span>
