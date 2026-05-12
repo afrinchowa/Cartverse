@@ -1,11 +1,4 @@
-import React from 'react'
-
-function Product() {
-  return (
-    <div>
-      <h1>Product</h1>
-      <p>This is the product page.</p>
-      import React, { useState } from "react";
+import React, { useState } from "react";
 import {
   Search,
   ShoppingCart,
@@ -95,7 +88,8 @@ function Product() {
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
- return (
+
+  return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
       <div className="relative h-[350px]">
@@ -116,7 +110,8 @@ function Product() {
           </p>
         </div>
       </div>
-         {/* Search & Filter */}
+
+      {/* Search & Filter */}
       <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-5 items-center justify-between">
         {/* Search */}
         <div className="relative w-full md:w-[400px]">
@@ -124,6 +119,7 @@ function Product() {
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
             size={18}
           />
+
           <input
             type="text"
             placeholder="Search products..."
@@ -173,9 +169,50 @@ function Product() {
                   <h2 className="text-lg font-semibold text-gray-800">
                     {product.name}
                   </h2>
-<div className='flex items-center gap-1 text-yellow-500'>
-  <Star size={16} fill="currentColor" />
-  <span>
-    {product.rating}
-  </span>
-</div>
+
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <Star size={16} fill="currentColor" />
+                    <span className="text-sm text-gray-700">
+                      {product.rating}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-gray-500 text-sm mb-5">
+                  Stylish premium-quality fashion product for everyday
+                  modern wear.
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-gray-900">
+                    {product.price}
+                  </span>
+
+                  <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">
+                    <ShoppingCart size={18} />
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-20">
+            <h2 className="text-3xl font-semibold text-gray-700">
+              No Products Found
+            </h2>
+
+            <p className="text-gray-500 mt-3">
+              Try searching with another keyword.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Product;
