@@ -206,7 +206,7 @@ function Product() {
             </h2>
 
             <p className="text-gray-500 mt-3">
-              Try searching with another keyword.
+             Try to adjusting your search or filter to find more products
             </p>
           </div>
         )}
