@@ -29,11 +29,11 @@ userData? (<Navigate to={location.state?.from || "/"} />) : (<Login />)
 
           <Route path="/" element={userData? <><Home /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
 
-          <Route path="/collections" element={<Collections />} />
+          <Route path="/collections" element={userData? <><Collections /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
 
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={userData? <><About /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
 
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={userData? <><Contact /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
 
         </Routes>
    </>
