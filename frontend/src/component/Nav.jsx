@@ -173,6 +173,11 @@ const Nav = () => {
             Home
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
+            <IoMdHome className="w-[25px] h-[25px] text-white md:hidden" onClick={()=>navigate("/about")} />
+          About
+          </button>
+
+          <button className="text-white flex items-center justify-center flex-col gap-2">
             <HiOutlineCollection className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/collections")} />
             Collection
           </button>
