@@ -169,15 +169,15 @@ const Nav = () => {
 
         <div className="w-full h-[90px] flex items-center justify-between px-5 fixed bottom-0 left-0 bg-[#191818] text-[12px] md:hidden">
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <IoMdHome className="w-[25px] h-[25px] text-white md:hidden "/>
+            <IoMdHome className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/")} />
             Home
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <HiOutlineCollection className="w-[25px] h-[25px] text-white md:hidden "/>
+            <HiOutlineCollection className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/collections")} />
             Collection
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <MdContactEmergency className="w-[25px] h-[25px] text-white md:hidden "/>
+            <MdContactEmergency className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/contact")} />
             Contact
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">

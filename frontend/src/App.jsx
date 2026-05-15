@@ -11,35 +11,88 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 function App() {
   let { userData } = React.useContext(UserContext);
-  let location =useLocation()
-const App = () => {
-  return (
-   <>
-   { userData && <Nav/>}
-    <Routes>
-      <Route path="/login" element={
-userData? (<Navigate to={location.state?.from || "/"} />) : (<Login />)
-      } />
-     
-      <Route path="/signup" element={
-       userData? (<Navigate to={location.state?.from || "/"} />) : (<Registration />)
-      } />
-      
-   
+  let location = useLocation();
+  const App = () => {
+    return (
+      <>
+        {userData && <Nav />}
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              userData ? (
+                <Navigate to={location.state?.from || "/"} />
+              ) : (
+                <Login />
+              )
+            }
+          />
 
-          <Route path="/" element={userData? <><Home /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
+          <Route
+            path="/signup"
+            element={
+              userData ? (
+                <Navigate to={location.state?.from || "/"} />
+              ) : (
+                <Registration />
+              )
+            }
+          />
 
-          <Route path="/collections" element={userData? <><Collections /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
+          <Route
+            path="/"
+            element={
+              userData ? (
+                <>
+                  <Home />
+                </>
+              ) : (
+                <Navigate to="/login" state={{ from: location.pathname }} />
+              )
+            }
+          />
 
-          <Route path="/about" element={userData? <><About /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
+          <Route
+            path="/collections"
+            element={
+              userData ? (
+                <>
+                  <Collections />
+                </>
+              ) : (
+                <Navigate to="/login" state={{ from: location.pathname }} />
+              )
+            }
+          />
 
-          <Route path="/contact" element={userData? <><Contact /></> : <Navigate to="/login" state={{from: location.pathname}} /> } />
+          <Route
+            path="/about"
+            element={
+              userData ? (
+                <>
+                  <About />
+                </>
+              ) : (
+                <Navigate to="/login" state={{ from: location.pathname }} />
+              )
+            }
+          />
 
+          <Route
+            path="/contact"
+            element={
+              userData ? (
+                <>
+                  <Contact />
+                </>
+              ) : (
+                <Navigate to="/login" state={{ from: location.pathname }} />
+              )
+            }
+          />
         </Routes>
-   </>
-       
-    
-  );
-};
+      </>
+    );
+  };
 }
 export default App;
