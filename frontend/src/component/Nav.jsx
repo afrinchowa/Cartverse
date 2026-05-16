@@ -173,20 +173,20 @@ const Nav = () => {
             Home
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <IoMdHome className="w-[25px] h-[25px] text-white md:hidden" onClick={()=>navigate("/about")} />
+            <IoMdHome className="w-[25px] h-[25px] text-white md:hidden" onClick={()=>{navigate("/about"); setShowProfile(false)}} />
           About
           </button>
 
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <HiOutlineCollection className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/collections")} />
+            <HiOutlineCollection className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>{navigate("/collections"); setShowProfile(false)}} />
             Collection
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <MdContactEmergency className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>navigate("/contact")} />
+            <MdContactEmergency className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>{navigate("/contact"); setShowProfile(false)}} />
             Contact
           </button>
           <button className="text-white flex items-center justify-center flex-col gap-2">
-            <TiShoppingCart className="w-[25px] h-[25px] text-white md:hidden "/>
+            <TiShoppingCart className="w-[25px] h-[25px] text-white md:hidden " onClick={()=>{navigate("/cart"); setShowProfile(false)}} />
             Cart
           </button>
         
