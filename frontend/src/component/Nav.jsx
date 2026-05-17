@@ -195,7 +195,7 @@ const Nav = () => {
 
       {/* Search Bar */}
       {showSearch && (
-        <div className="fixed top-[70px] left-0 w-full bg-slate-400/90 backdrop-blur-md py-6 z-40">
+        <div className=" fixed  top-[70px] left-0 lg:w-[50%]  w-[80%] bg-slate-400/90 backdrop-blur-md py-6 z-40">
           <input
             type="text"
             placeholder="Search products..."
