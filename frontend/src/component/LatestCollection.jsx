@@ -1,11 +1,13 @@
 import React from 'react'
+import Title from './Title'
 
 function LatestCollection() {
   return (
-    <div className='w-full h-[400px] bg-gray-200 flex items-center justify-center'>
- <h1 className='text-3xl font-bold text-center mt-10 mb-5'>
-      Latest Collection
-    </h1>
+    <div className=''>
+<div className='h-[8%] w-full text-center md:mt-[50px]'>
+<Title text1={LATEST} text2={COLLECTIONS}/>
+<p>Step Into Style New COllection Dropping This Sesason</p>
+</div>
     </div>
    
   )
