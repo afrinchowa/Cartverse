@@ -32,6 +32,8 @@ function Home() {
     setHeroCount={setHeroCount} 
     heroData={heroData[heroCount]}/>
     </div>
+
+    <Product/>
     </div>
   )
 }
