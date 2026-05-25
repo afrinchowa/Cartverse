@@ -2,7 +2,8 @@ import React from 'react'
 
 function Card() {
   return (
-    <div>Card</div>
+    <div className='w-[300px] max-w-[90%]
+     h-[400px] bg'>Card</div>
   )
 }
 
