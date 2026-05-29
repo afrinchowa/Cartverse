@@ -9,6 +9,12 @@ function Card() {
 <h1 className='text-[18px] font-bold text-center text-[#ffffff]'>
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.
 </h1>
+
+<div className="w-full h-[100px] mb-[10px] flex items-center justify-center">
+  <p className="text-[14px] text-[#ffffff] text-center">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies aliquet, nunc nisl aliquet nunc, vitae aliquet nisl nunc eget nunc.
+  </p>
+</div>
         <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="" className='w-full h-[200px] object-cover rounded-lg' />
       </div>
 
