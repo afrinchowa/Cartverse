@@ -1,5 +1,8 @@
 import React from 'react'
 import Title from './Title'
+import Card from './Card'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { useContext } from 'react'
 import { shopDataContext } from '../context/shopDataContext'
 function LatestCollection() {
