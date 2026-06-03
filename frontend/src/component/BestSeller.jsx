@@ -12,6 +12,10 @@ function BestSeller() {
     <div className="h-[80%] w-full bg-gray-200 mt-[20px]" 
     
     >
+     <div className="h-full w-full flex items-center justify-center">
+
+        
+
         <p className='text-[20px] text-gray-500 mt-[20px]'>Best sellers will be displayed here.</p>
     </div>
     </div>
