@@ -1,25 +1,18 @@
-import React from 'react'
-import Title from './Title'
+import React from "react";
+import Title from "./Title";
 
 function BestSeller() {
   return (
-    <div
-    className="h-[8%] w-full text-center mt-[50px]  "
-    >
-      <Title text1={"BEST"} text2={"SELLERS"} />
-      <p>Discover Our Best Sellers - Shop Now and Experience the Difference!</p>
-    
-    <div className="h-[80%] w-full bg-gray-200 mt-[20px]" 
-    
-    >
-     <div className="h-full w-full flex items-center justify-center">
-
-        
-
-        <p className='text-[20px] text-gray-500 mt-[20px]'>Best sellers will be displayed here.</p>
+    <div>
+      <div className="h-[8%] w-full text-center mt-[50px]  ">
+        <Title text1={"BEST"} text2={"SELLERS"} />
+        <p>
+          Discover Our Best Sellers - Shop Now and Experience the Difference!
+        </p>
+      </div>
+      <div className="h-[92%] w-full flex justify-center items-center gap-10 mt-[20px] "></div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default BestSeller
+export default BestSeller;
