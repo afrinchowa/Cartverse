@@ -2,7 +2,13 @@ import React from "react";
 import Title from "./Title";
 
 function BestSeller() {
-  let {products} = useContext(shopDataContext);
+  let { products } = useContext(shopDataContext);
+  let [bestSeller, setBestSeller] = useState([]);
+
+  useEffect(() => {
+    let filterProduct = products.filter((item) => item.bestSeller);
+    setBestSeller(filterProduct.slice(0, 4));
+  }, [products]);
   return (
     <div>
       <div className="h-[8%] w-full text-center mt-[50px]  ">
@@ -12,26 +18,15 @@ function BestSeller() {
         </p>
       </div>
       <div className="h-[92%] w-full flex justify-center items-center gap-10 mt-[20px] ">
-products.map((product) => {
-  return (
-    <div className="h-[300px] w-[200px] bg-[#f5f5f5] rounded-lg flex flex-col justify-center items-center gap-3">
-      <img src={product.image} alt={product.name} className="h-[150px] w-[150px] object-cover rounded-lg" />
-      <h3 className="text-lg font-semibold">{product.name}</h3>
-      <p className="text-gray-600">${product.price}</p>
-
-<div className="flex gap-2">
-<button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-  Add to Cart
-</button>
-<button className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-  View Details
-</button>
-    
-    </div>
-
-
-  );
-})
+        {bestSeller.map((item, index) => (
+          <Card
+            key={index}
+            name={item.name}
+            price={item.price}
+            image={item.image1}
+            id={item._id}
+          />
+        ))}
       </div>
     </div>
   );
