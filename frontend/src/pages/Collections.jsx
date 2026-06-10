@@ -22,6 +22,7 @@ function Collections() {
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"TopWear"} className="w-3 h-3"/> TopWear</p>
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"BottomWear"} className="w-3 h-3"/> BottomWear</p>
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"WinterWear"} className="w-3 h-3"/> WinterWear</p>
+            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"SummerWear"} className="w-3 h-3"/> SummerWear</p>
           </div>
         </div>
       </div>
