@@ -10,8 +10,8 @@ function Collections() {
       <div className=" md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4">
         <p className="text-[25px] font-semibold flex gap-[5px] items-center justify-start cursor-pointer" onClick={()=>setShowFilter(prev => !prev)}  >
           FILTERS{""}
-          <FaAngleRight />
-          <FaAngleDown />
+          {!showFilter && <FaAngleRight className="text-[18px] md:hidden" />}
+          {showFilter && <FaAngleDown className="text-[18px] md:hidden" />}
         </p>
        
         <div className={`border-2px border-[#dedcdc] pl-5 py-3 mt-6 rounded-md bg-slate-600 ${showFilter? "" : "hidden"}  md:block` } >
