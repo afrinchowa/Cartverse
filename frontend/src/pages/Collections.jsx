@@ -1,5 +1,8 @@
 import { Search, Heart, ShoppingBag, Star } from "lucide-react";
 
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
+
 function Collections() {
   let [showFilter,setShowFilter] = useState(false); 
   return (
@@ -7,12 +10,15 @@ function Collections() {
       <div className=" md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4">
         <p className="text-[25px] font-semibold flex gap-[5px] items-center justify-start cursor-pointer" onClick={()=>setShowFilter(prev => !prev)}  >
           FILTERS{""}
+          <FaAngleRight />
+          <FaAngleDown />
         </p>
+       
         <div className={`border-2px border-[#dedcdc] pl-5 py-3 mt-6 rounded-md bg-slate-600 ${showFilter? "" : "hidden"}  md:block` } >
           <p className="text-[18px] text-[#f8fafa] font-medium">CATEGORIES</p>
           <div className="w-[230px] h-[120px] flex items-start justify-center gap-[10px] flex-col">
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"Men"} className="w-3 h-3"/> Men</p>
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"Men"} className="w-3 h-3"/> Men</p>
+          
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"Women"} className="w-3 h-3"/> Women</p>
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light"> <input type="checkbox" value={"Kids"} className="w-3 h-3"/> Kids</p>
           </div>
