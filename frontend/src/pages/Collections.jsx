@@ -6,8 +6,9 @@ import { FaAngleDown } from "react-icons/fa";
 function Collections() {
   let [showFilter,setShowFilter] = useState(false); 
   return (
-    <div className={`md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2 `}>
-      <div className=" md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] ${showFilter? "h-[45vh]" : "h-[100vh]"} p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4">
+    <div className="md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2" >
+      <div className= {`md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] ${showFilter ? "h-[45vh]" : "h-[100vh]"} p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4`}>
+
         <p className="text-[25px] font-semibold flex gap-[5px] items-center justify-start cursor-pointer" onClick={()=>setShowFilter(prev => !prev)}  >
           FILTERS{""}
           {!showFilter && <FaAngleRight className="text-[18px] md:hidden" />}
@@ -33,6 +34,21 @@ function Collections() {
           </div>
         </div>
       </div>
+<div className="lg:pl-[20%] md:py-[10px]   w-full md:w-[70vw] lg:w-[80vw] min-h-screen flex items-start justify-start gap-4 flex-wrap p-[20px] pt-[30px]">
+<div className="w-[100vw] md:w-[80vw] p-20px flex justify-between flex col lg:flex-row lg:pz-50px  ">
+<Title text1={"All"}  text2={"COLLECTIONS"} ></Title>
+<select className="w-[60%] md:w-[200px] px-[10px]   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  ">
+  <option className="w-full h-full" value="Short By: Relevant">Short By: Relevant</option>
+  
+  <option className="w-full h-full" value="priceLowToHigh">Price: Low to High</option>
+  <option className="w-full h-full" value="priceHighToLow">Price: High to Low</option>
+</select>
+
+  </div>
+  </div>
+
+
+
     </div>
   );
 }
