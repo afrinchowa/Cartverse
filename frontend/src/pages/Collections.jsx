@@ -5,6 +5,11 @@ import { FaAngleDown } from "react-icons/fa";
 
 function Collections() {
   let [showFilter, setShowFilter] = useState(false);
+  let {products}= useContext(shopDataContext)
+  let [filteredProduct, setFilteredProduct] = useState(products);
+  let [category, setCategory] = useState([]);
+  let [subCategory, setSubCategory] = useState([]);
+
   return (
     <div className="md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
       <div
@@ -93,9 +98,9 @@ function Collections() {
             </option>
           </select>
         </div>
-    <div className="w-full h-full lg:w-[80vw] md:w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
-
-</div>
+        <div className="w-full h-full lg:w-[80vw] md:w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
+          
+        </div>
       </div>
     </div>
   );
