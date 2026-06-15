@@ -5,11 +5,34 @@ import { FaAngleDown } from "react-icons/fa";
 
 function Collections() {
   let [showFilter, setShowFilter] = useState(false);
-  let {products}= useContext(shopDataContext)
+  let { products } = useContext(shopDataContext);
   let [filteredProduct, setFilteredProduct] = useState(products);
   let [category, setCategory] = useState([]);
   let [subCategory, setSubCategory] = useState([]);
+  let [sortType, setSortType] = useState("relevant");
 
+  const toggleCategory = (e) => {
+    let value = e.target.value;
+    if (category.includes(value)) {
+      setCategory(prev => prev.filter(item => item !== value));
+    } else {
+      setCategory(prev => [...prev, value]);
+    }
+  };
+  const applyFilter = () => {
+    let productCopy = products.slice();
+    if (category.length > 0) {
+      productCopy = productCopy.filter((item) =>
+        category.includes(item.category),
+      );
+    }
+    if (subCategory.length > 0) {
+      productCopy = productCopy.filter((item) =>
+        subCategory.includes(item.subCategory),
+      );
+    }
+    setFilteredProduct(productCopy);
+  };
   return (
     <div className="md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
       <div
@@ -98,9 +121,7 @@ function Collections() {
             </option>
           </select>
         </div>
-        <div className="w-full h-full lg:w-[80vw] md:w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
-          
-        </div>
+        <div className="w-full h-full lg:w-[80vw] md:w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]"></div>
       </div>
     </div>
   );
