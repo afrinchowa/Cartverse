@@ -19,6 +19,19 @@ function Collections() {
       setCategory(prev => [...prev, value]);
     }
   };
+  const toggleSubCategory = (e) => {
+    let value = e.target.value;
+    if (subCategory.includes(value)) {
+      setSubCategory(prev => prev.filter(item => item !== value));
+    } else {
+      setCategory(prev => [...prev, value]);
+    }
+  };
+
+  const toggleSortType = (e) => {
+    setSortType(e.target.value);
+  };
+
   const applyFilter = () => {
     let productCopy = products.slice();
     if (category.length > 0) {
