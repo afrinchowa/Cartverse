@@ -31,7 +31,13 @@ function Collections() {
   const toggleSortType = (e) => {
     setSortType(e.target.value);
   };
-
+const sortProducts = () => {
+    let productCopy = filteredProduct.slice();
+    if (sortType === "priceLowToHigh") {
+      productCopy.sort((a, b) => a.price - b.price);
+    } else if (sortType === "priceHighToLow") {
+      productCopy.sort((a, b) => b.price - a.price);
+    }
   const applyFilter = () => {
     let productCopy = products.slice();
     if (category.length > 0) {
