@@ -28,13 +28,6 @@ function Collections() {
     }
   };
 
-  const toggleSortType = (e) => {
-    setSortType(e.target.value);
-  };
-  const applySort = () => {
-    let productCopy = filteredProduct.slice();  
-  }
-
 const sortProducts = () => {
     let productCopy = filteredProduct.slice();
     if (sortType === "priceLowToHigh") {
@@ -77,17 +70,17 @@ const sortProducts = () => {
           <div className="w-[230px] h-[120px] flex items-start justify-center gap-[10px] flex-col">
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
               {" "}
-              <input type="checkbox" value={"Men"} className="w-3 h-3" /> Men
+              <input type="checkbox" value={"Men"} className="w-3 h-3" onChange={toggleCategory} /> Men
             </p>
 
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
               {" "}
-              <input type="checkbox" value={"Women"} className="w-3 h-3" />{" "}
+              <input type="checkbox" value={"Women"} className="w-3 h-3" onChange={toggleCategory} />{" "}
               Women
             </p>
             <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
               {" "}
-              <input type="checkbox" value={"Kids"} className="w-3 h-3" /> Kids
+              <input type="checkbox" value={"Kids"} className="w-3 h-3" onChange={toggleCategory} /> Kids
             </p>
           </div>
         </div>
@@ -104,6 +97,7 @@ const sortProducts = () => {
                 type="checkbox"
                 value={"TopWear"}
                 className="w-3 h-3"
+                onChange={toggleSubCategory}
               />{" "}
               TopWear
             </p>
@@ -113,6 +107,7 @@ const sortProducts = () => {
                 type="checkbox"
                 value={"BottomWear"}
                 className="w-3 h-3"
+                   onChange={toggleSubCategory}
               />{" "}
               BottomWear
             </p>
@@ -122,6 +117,7 @@ const sortProducts = () => {
                 type="checkbox"
                 value={"WinterWear"}
                 className="w-3 h-3"
+                   onChange={toggleSubCategory}
               />{" "}
               WinterWear
             </p>
