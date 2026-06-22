@@ -53,6 +53,10 @@ const sortProducts = () => {
     setSortType(e.target.value);
     sortProducts();
   };
+  const handleCategoryChange = (e) => {
+    toggleCategory(e);
+    applyFilter();
+  } 
   return (
     <div className="md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
       <div
