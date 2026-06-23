@@ -53,6 +53,10 @@ const sortProducts = () => {
     setSortType(e.target.value);
     sortProducts();
   };
+  const handleSortChange = (e) => {
+    setSortType(e.target.value);
+    sortProducts();
+  };
   const handleCategoryChange = (e) => {
     toggleCategory(e);
     applyFilter();
