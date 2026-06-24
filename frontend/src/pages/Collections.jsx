@@ -53,18 +53,15 @@ const sortProducts = () => {
     setSortType(e.target.value);
     sortProducts();
   };
-  const handleSortChange = (e) => {
-    setSortType(e.target.value);
-    sortProducts();
-  };
+
   const handleCategoryChange = (e) => {
     toggleCategory(e);
     applyFilter();
   } 
   return (
-    <div className="md:w-[100vw] lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
+    <div className="md:w-screen lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
       <div
-        className={`md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] ${showFilter ? "h-[45vh]" : "h-[100vh]"} p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4`}
+        className={`md:w-[30vw] lg:w-[20vw] w-screen md:min-h-screen ${showFilter ? "h-[45vh]" : "h-screen"} p-5 border-r border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4`}
       >
         <p
           className="text-[25px] font-semibold flex gap-[5px] items-center justify-start cursor-pointer"
@@ -79,18 +76,18 @@ const sortProducts = () => {
           className={`border-2px border-[#dedcdc] pl-5 py-3 mt-6 rounded-md bg-slate-600 ${showFilter ? "" : "hidden"}  md:block`}
         >
           <p className="text-[18px] text-[#f8fafa] font-medium">CATEGORIES</p>
-          <div className="w-[230px] h-[120px] flex items-start justify-center gap-[10px] flex-col">
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+          <div className="w-[230px] h-[120px] flex items-start justify-center gap-2.5 flex-col">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input type="checkbox" value={"Men"} className="w-3 h-3" onChange={toggleCategory} /> Men
             </p>
 
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input type="checkbox" value={"Women"} className="w-3 h-3" onChange={toggleCategory} />{" "}
               Women
             </p>
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input type="checkbox" value={"Kids"} className="w-3 h-3" onChange={toggleCategory} /> Kids
             </p>
@@ -102,8 +99,8 @@ const sortProducts = () => {
           <p className="text-[18px] text-[#f8fafa] font-medium">
             SUB-CATEGORIES
           </p>
-          <div className="w-[230px] h-[120px] flex items-start justify-center gap-[10px] flex-col">
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+          <div className="w-[230px] h-[120px] flex items-start justify-center gap-2.5 flex-col">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input
                 type="checkbox"
@@ -113,7 +110,7 @@ const sortProducts = () => {
               />{" "}
               TopWear
             </p>
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input
                 type="checkbox"
@@ -123,7 +120,7 @@ const sortProducts = () => {
               />{" "}
               BottomWear
             </p>
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
+            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
               {" "}
               <input
                 type="checkbox"
@@ -136,10 +133,10 @@ const sortProducts = () => {
           </div>
         </div>
       </div>
-      <div className="lg:pl-[20%] md:py-[10px]   w-full md:w-[70vw] lg:w-[80vw] min-h-screen flex items-start justify-start gap-4 flex-wrap p-[20px] pt-[30px]">
-        <div className="w-[100vw] md:w-[80vw] p-20px flex justify-between flex col lg:flex-row lg:pz-50px  ">
+      <div className="lg:pl-[20%] md:py-2.5   w-full md:w-[70vw] lg:w-[80vw] min-h-screen flex items-start justify-start gap-4 flex-wrap p-5 pt-[30px]">
+        <div className="w-screen md:w-[80vw] p-20px flex justify-between col lg:flex-row lg:pz-50px  ">
           <Title text1={"All"} text2={"COLLECTIONS"}></Title>
-          <select className="w-[60%] md:w-[200px] px-[10px]   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  ">
+          <select className="w-[60%] md:w-[200px] px-2.5   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  ">
             <option className="w-full h-full" value="Short By: Relevant">
               Short By: Relevant
             </option>
@@ -152,10 +149,10 @@ const sortProducts = () => {
             </option>
           </select>
         </div>
-        <div className="w-full h-full lg:w-[80vw] md:w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]"></div>
+        <div className="w-full h-full lg:w-[80vw] md:w-screen min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]"></div>
       </div>
     </div>
   );
 }
 
-export default Collections;
+export default Collections
