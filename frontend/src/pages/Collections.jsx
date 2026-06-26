@@ -60,9 +60,7 @@ useEffect(() => {
     applyFilter();
   }, [category, subCategory]);
 
-  useEffect(() => {
-    sortProducts();
-  }, [sortType]);
+
 
   return (
     <div className="md:w-screen lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
@@ -155,7 +153,15 @@ useEffect(() => {
             </option>
           </select>
         </div>
-        <div className="w-full h-full lg:w-[80vw] md:w-screen min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]"></div>
+        <div className="w-full h-full lg:w-[80vw] md:w-screen min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
+
+{
+  filteredProduct.map((item,index)=>{
+    <Card key={index} id={item._id} name={item.name} price={item.price} image={item.image} />
+  })
+}
+
+        </div>
       </div>
     </div>
   );
