@@ -1,5 +1,5 @@
 import { Search, Heart, ShoppingBag, Star } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 
@@ -50,6 +50,23 @@ const sortProducts = () => {
     setFilteredProduct(productCopy);
   };
 
+const shortProducts = () => {
+  let fbCopy = filteredProduct.slice();
+  switch (sortType) {
+    case "low-high":
+     setFilterProduct(fbCopy.sort((a, b) => a.price - b.price));
+      break;
+    case "high-low":
+      setFilteredProduct(fbCopy.sort((a, b) => b.price - a.price));
+      break;
+    default:
+      applyFilter();
+      break;
+  }
+useEffect(() => {
+    setFilteredProduct(products);
+  }, [products]);
+
   useEffect(() => {
     setFilteredProduct(products);
     applyFilter();
@@ -63,7 +80,7 @@ useEffect(() => {
 
 
   return (
-    <div className="md:w-screen lg:w-[20vw] w-full min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
+    <div className="md:w-screen lg:w-[20vw] w-[90vw] min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
       <div
         className={`md:w-[30vw] lg:w-[20vw] w-screen md:min-h-screen ${showFilter ? "h-[45vh]" : "h-screen"} p-5 border-r border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4`}
       >
@@ -157,7 +174,7 @@ useEffect(() => {
 
 {
   filteredProduct.map((item,index)=>{
-    <Card key={index} id={item._id} name={item.name} price={item.price} image={item.image} />
+    <Card key={index} id={item._id} name={item.name} price={item.price} image={item.image1} />
   })
 }
 
