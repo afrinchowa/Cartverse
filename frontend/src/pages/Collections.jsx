@@ -67,6 +67,12 @@ useEffect(() => {
     setFilteredProduct(products);
   }, [products]);
 
+
+useEffect (() => {
+    sortProducts();
+  }, [sortType]);
+
+
   useEffect(() => {
     setFilteredProduct(products);
     applyFilter();
