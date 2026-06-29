@@ -82,7 +82,10 @@ useEffect (() => {
 useEffect(() => {
     applyFilter();
   }, [category, subCategory]);
-
+ useEffect(() => {
+    sortProducts();
+  }, [sortType]);
+    
 
 
   return (
