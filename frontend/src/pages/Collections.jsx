@@ -85,6 +85,18 @@ useEffect(() => {
  useEffect(() => {
     sortProducts();
   }, [sortType]);
+useEffect(() => {
+    applyFilter();
+  }, [category, subCategory]);
+ useEffect(() => {
+    sortProducts();
+  }, [sortType]);
+useEffect(() => {
+    applyFilter();
+  }, [category, subCategory]);
+ useEffect(() => {
+    sortProducts();
+  }, [sortType]);
     
 
 
