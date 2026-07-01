@@ -28,7 +28,7 @@ function Collections() {
     }
   };
 
-const sortProducts = () => {
+const sortProducts = (e) => {
     let productCopy = filteredProduct.slice();
     if (sortType === "priceLowToHigh") {
       productCopy.sort((a, b) => a.price - b.price);
@@ -82,22 +82,8 @@ useEffect (() => {
 useEffect(() => {
     applyFilter();
   }, [category, subCategory]);
- useEffect(() => {
-    sortProducts();
-  }, [sortType]);
-useEffect(() => {
-    applyFilter();
-  }, [category, subCategory]);
- useEffect(() => {
-    sortProducts();
-  }, [sortType]);
-useEffect(() => {
-    applyFilter();
-  }, [category, subCategory]);
- useEffect(() => {
-    sortProducts();
-  }, [sortType]);
-    
+
+
 
 
   return (
@@ -178,7 +164,7 @@ useEffect(() => {
       <div className="lg:pl-[20%] md:py-2.5   w-full md:w-[70vw] lg:w-[80vw] min-h-screen flex items-start justify-start gap-4 flex-wrap p-5 pt-[30px]">
         <div className="w-screen md:w-[80vw] p-20px flex justify-between col lg:flex-row lg:pz-50px  ">
           <Title text1={"All"} text2={"COLLECTIONS"}></Title>
-          <select className="w-[60%] md:w-[200px] px-2.5   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  ">
+          <select className="w-[60%] md:w-[200px] px-2.5   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  "  onChange={(e) => SetSortType(e.target.value)}>
             <option className="w-full h-full" value="Short By: Relevant">
               Short By: Relevant
             </option>
