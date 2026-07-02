@@ -1,194 +1,237 @@
-import { Search, Heart, ShoppingBag, Star } from "lucide-react";
-import { useEffect, useState } from "react";
-import { FaAngleRight } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
+import { useContext, useEffect, useState } from "react";
+import { FaAngleRight, FaAngleDown } from "react-icons/fa";
+
+import Title from "../Components/Title";
+import Card from "../Components/Card";
+import { shopDataContext } from "../Context/ShopContext";
 
 function Collections() {
-  let [showFilter, setShowFilter] = useState(false);
-  let { products } = useContext(shopDataContext);
-  let [filteredProduct, setFilteredProduct] = useState(products);
-  let [category, setCategory] = useState([]);
-  let [subCategory, setSubCategory] = useState([]);
-  let [sortType, setSortType] = useState("relevant");
+  const [showFilter, setShowFilter] = useState(false);
 
+  const { products } = useContext(shopDataContext);
+
+  const [filteredProduct, setFilteredProduct] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [sortType, setSortType] = useState("relevant");
+
+  // Toggle Category
   const toggleCategory = (e) => {
-    let value = e.target.value;
+    const value = e.target.value;
+
     if (category.includes(value)) {
-      setCategory(prev => prev.filter(item => item !== value));
+      setCategory(category.filter((item) => item !== value));
     } else {
-      setCategory(prev => [...prev, value]);
+      setCategory([...category, value]);
     }
   };
+
+  // Toggle Sub Category
   const toggleSubCategory = (e) => {
-    let value = e.target.value;
+    const value = e.target.value;
+
     if (subCategory.includes(value)) {
-      setSubCategory(prev => prev.filter(item => item !== value));
+      setSubCategory(subCategory.filter((item) => item !== value));
     } else {
-      setCategory(prev => [...prev, value]);
+      setSubCategory([...subCategory, value]);
     }
   };
-
-const sortProducts = (e) => {
-    let productCopy = filteredProduct.slice();
-    if (sortType === "priceLowToHigh") {
-      productCopy.sort((a, b) => a.price - b.price);
-    } else if (sortType === "priceHighToLow") {
-      productCopy.sort((a, b) => b.price - a.price);
-    }
-  const applyFilter = () => {
-    let productCopy = products.slice();
-    if (category.length > 0) {
-      productCopy = productCopy.filter((item) =>
-        category.includes(item.category),
-      );
-    }
-    if (subCategory.length > 0) {
-      productCopy = productCopy.filter((item) =>
-        subCategory.includes(item.subCategory),
-      );
-    }
-    setFilteredProduct(productCopy);
-  };
-
-const shortProducts = () => {
-  let fbCopy = filteredProduct.slice();
-  switch (sortType) {
-    case "low-high":
-     setFilterProduct(fbCopy.sort((a, b) => a.price - b.price));
-      break;
-    case "high-low":
-      setFilteredProduct(fbCopy.sort((a, b) => b.price - a.price));
-      break;
-    default:
-      applyFilter();
-      break;
-  }
-useEffect(() => {
-    setFilteredProduct(products);
-  }, [products]);
-
-
-useEffect (() => {
-    sortProducts();
-  }, [sortType]);
-
 
   useEffect(() => {
-    setFilteredProduct(products);
-    applyFilter();
-    sortProducts();
-  },[products, category, subCategory, sortType]);
+    let productCopy = [...products];
 
-useEffect(() => {
-    applyFilter();
-  }, [category, subCategory]);
+    // Category Filter
+    if (category.length > 0) {
+      productCopy = productCopy.filter((item) =>
+        category.includes(item.category)
+      );
+    }
 
+    // Sub Category Filter
+    if (subCategory.length > 0) {
+      productCopy = productCopy.filter((item) =>
+        subCategory.includes(item.subCategory)
+      );
+    }
 
+    // Sorting
+    if (sortType === "priceLowToHigh") {
+      productCopy.sort((a, b) => a.price - b.price);
+    }
 
+    if (sortType === "priceHighToLow") {
+      productCopy.sort((a, b) => b.price - a.price);
+    }
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFilteredProduct(productCopy);
+  }, [products, category, subCategory, sortType]);
 
   return (
-    <div className="md:w-screen lg:w-[20vw] w-[90vw] min-h-screen bg-linear-to-l from-gray-[#141414] to-gray-[#0c2025] flex flex-col items-start md:flex-row justify-start pt-[70px] overflow-x-hidden z-2">
+    <div className="md:w-screen lg:w-[20vw] w-[90vw] min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] flex flex-col md:flex-row pt-[70px] overflow-x-hidden">
+
+      {/* Filter Section */}
+
       <div
-        className={`md:w-[30vw] lg:w-[20vw] w-screen md:min-h-screen ${showFilter ? "h-[45vh]" : "h-screen"} p-5 border-r border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center justify-center gap-4`}
+        className={`md:w-[30vw] lg:w-[20vw] w-full md:min-h-screen ${
+          showFilter ? "h-[45vh]" : "h-screen"
+        } p-5 border-r border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center`}
       >
         <p
-          className="text-[25px] font-semibold flex gap-[5px] items-center justify-start cursor-pointer"
-          onClick={() => setShowFilter((prev) => !prev)}
+          className="text-[25px] font-semibold flex items-center gap-2 cursor-pointer"
+          onClick={() => setShowFilter(!showFilter)}
         >
-          FILTERS{""}
-          {!showFilter && <FaAngleRight className="text-[18px] md:hidden" />}
-          {showFilter && <FaAngleDown className="text-[18px] md:hidden" />}
+          FILTERS
+
+          {!showFilter && (
+            <FaAngleRight className="md:hidden text-lg" />
+          )}
+
+          {showFilter && (
+            <FaAngleDown className="md:hidden text-lg" />
+          )}
         </p>
 
-        <div
-          className={`border-2px border-[#dedcdc] pl-5 py-3 mt-6 rounded-md bg-slate-600 ${showFilter ? "" : "hidden"}  md:block`}
-        >
-          <p className="text-[18px] text-[#f8fafa] font-medium">CATEGORIES</p>
-          <div className="w-[230px] h-[120px] flex items-start justify-center gap-2.5 flex-col">
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
-              <input type="checkbox" value={"Men"} className="w-3 h-3" onChange={toggleCategory} /> Men
-            </p>
+        {/* Categories */}
 
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
-              <input type="checkbox" value={"Women"} className="w-3 h-3" onChange={toggleCategory} />{" "}
+        <div
+          className={`border-2 border-gray-300 rounded-md bg-slate-600 p-5 mt-6 ${
+            showFilter ? "" : "hidden"
+          } md:block`}
+        >
+          <p className="text-lg font-semibold mb-4">CATEGORIES</p>
+
+          <div className="space-y-3">
+
+            <label className="flex gap-2">
+              <input
+                type="checkbox"
+                value="Men"
+                onChange={toggleCategory}
+              />
+              Men
+            </label>
+
+            <label className="flex gap-2">
+              <input
+                type="checkbox"
+                value="Women"
+                onChange={toggleCategory}
+              />
               Women
-            </p>
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
-              <input type="checkbox" value={"Kids"} className="w-3 h-3" onChange={toggleCategory} /> Kids
-            </p>
+            </label>
+
+            <label className="flex gap-2">
+              <input
+                type="checkbox"
+                value="Kids"
+                onChange={toggleCategory}
+              />
+              Kids
+            </label>
+
           </div>
         </div>
+
+        {/* Sub Categories */}
+
         <div
-          className={`border-2px border-[#dedcdc] pl-5 py-3 mt-6 rounded-md bg-slate-600 ${showFilter ? "" : "hidden"}  md:block`}
+          className={`border-2 border-gray-300 rounded-md bg-slate-600 p-5 mt-6 ${
+            showFilter ? "" : "hidden"
+          } md:block`}
         >
-          <p className="text-[18px] text-[#f8fafa] font-medium">
+          <p className="text-lg font-semibold mb-4">
             SUB-CATEGORIES
           </p>
-          <div className="w-[230px] h-[120px] flex items-start justify-center gap-2.5 flex-col">
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
+
+          <div className="space-y-3">
+
+            <label className="flex gap-2">
               <input
                 type="checkbox"
-                value={"TopWear"}
-                className="w-3 h-3"
+                value="TopWear"
                 onChange={toggleSubCategory}
-              />{" "}
+              />
               TopWear
-            </p>
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
+            </label>
+
+            <label className="flex gap-2">
               <input
                 type="checkbox"
-                value={"BottomWear"}
-                className="w-3 h-3"
-                   onChange={toggleSubCategory}
-              />{" "}
+                value="BottomWear"
+                onChange={toggleSubCategory}
+              />
               BottomWear
-            </p>
-            <p className="flex items-center justify-center gap-2.5 text-[16px] font-light">
-              {" "}
+            </label>
+
+            <label className="flex gap-2">
               <input
                 type="checkbox"
-                value={"WinterWear"}
-                className="w-3 h-3"
-                   onChange={toggleSubCategory}
-              />{" "}
+                value="WinterWear"
+                onChange={toggleSubCategory}
+              />
               WinterWear
-            </p>
+            </label>
+
           </div>
         </div>
       </div>
-      <div className="lg:pl-[20%] md:py-2.5   w-full md:w-[70vw] lg:w-[80vw] min-h-screen flex items-start justify-start gap-4 flex-wrap p-5 pt-[30px]">
-        <div className="w-screen md:w-[80vw] p-20px flex justify-between col lg:flex-row lg:pz-50px  ">
-          <Title text1={"All"} text2={"COLLECTIONS"}></Title>
-          <select className="w-[60%] md:w-[200px] px-2.5   h-[50px] bg-slate-600 text-white rounded-lg hover:border-[#46d1f7] border-2  "  onChange={(e) => SetSortType(e.target.value)}>
-            <option className="w-full h-full" value="Short By: Relevant">
-              Short By: Relevant
+
+      {/* Product Section */}
+
+      <div className="lg:pl-[20%] w-full md:w-[70vw] lg:w-[80vw] min-h-screen p-5">
+
+        <div className="flex justify-between items-center flex-wrap gap-4">
+
+          <Title text1="All" text2="COLLECTIONS" />
+
+          <select
+            className="w-[200px] h-[45px] bg-slate-600 text-white rounded-lg border-2 border-transparent hover:border-cyan-400 px-3"
+            value={sortType}
+            onChange={(e) => setSortType(e.target.value)}
+          >
+            <option value="relevant">
+              Sort By: Relevant
             </option>
 
-            <option className="w-full h-full" value="priceLowToHigh">
+            <option value="priceLowToHigh">
               Price: Low to High
             </option>
-            <option className="w-full h-full" value="priceHighToLow">
+
+            <option value="priceHighToLow">
               Price: High to Low
             </option>
+
           </select>
-        </div>
-        <div className="w-full h-full lg:w-[80vw] md:w-screen min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
-
-{
-  filteredProduct.map((item,index)=>{
-    <Card key={index} id={item._id} name={item.name} price={item.price} image={item.image1} />
-  })
-}
 
         </div>
+
+        {/* Products */}
+
+        <div className="mt-8 flex flex-wrap gap-8">
+
+          {filteredProduct.length > 0 ? (
+            filteredProduct.map((item) => (
+              <Card
+                key={item._id}
+                id={item._id}
+                name={item.name}
+                price={item.price}
+                image={item.image1}
+              />
+            ))
+          ) : (
+            <p className="text-white text-xl">
+              No products found.
+            </p>
+          )}
+
+        </div>
+
       </div>
+
     </div>
   );
 }
 
-export default Collections
+export default Collections;
