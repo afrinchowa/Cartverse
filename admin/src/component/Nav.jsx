@@ -15,7 +15,7 @@ function Nav() {
   const serverUrl = auth?.serverUrl;
   const getAdmin = admin?.getAdmin;
 
-  const logOut = async () => {
+  const handleLogOut = async () => {
     try {
       setLoading(true);
 
@@ -50,7 +50,7 @@ function Nav() {
       {/* Logout */}
       <button
         disabled={loading}
-        onClick={logOut}
+        onClick={handleLogOut}
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition disabled:opacity-50"
       >
         {loading ? "Logging out..." : "Logout"}

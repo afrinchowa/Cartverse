@@ -1,44 +1,56 @@
 import { useContext, useEffect, useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
-import Title from "../Components/Title";
-import Card from "../Components/Card";
+
+import Card from "../component/Card";
+import Title from "../component/Title";
 import { shopDataContext } from "../Context/ShopContext";
 
 function Collections() {
   const [showFilter, setShowFilter] = useState(false);
 
-  const { products } = useContext(shopDataContext);
+  const {
+    products = [],
+    search = "",
+    showSearch,
+  } = useContext(shopDataContext);
 
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
-  // Toggle Category
+  // Category Filter
   const toggleCategory = (e) => {
     const value = e.target.value;
 
-    if (category.includes(value)) {
-      setCategory(category.filter((item) => item !== value));
-    } else {
-      setCategory([...category, value]);
-    }
+    setCategory((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
+    );
   };
 
-  // Toggle Sub Category
+  // SubCategory Filter
   const toggleSubCategory = (e) => {
     const value = e.target.value;
 
-    if (subCategory.includes(value)) {
-      setSubCategory(subCategory.filter((item) => item !== value));
-    } else {
-      setSubCategory([...subCategory, value]);
-    }
+    setSubCategory((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
+    );
   };
 
   useEffect(() => {
     let productCopy = [...products];
+
+    // Search Filter
+    if (showSearch && search.trim() !== "") {
+      productCopy = productCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
     // Category Filter
     if (category.length > 0) {
@@ -47,7 +59,7 @@ function Collections() {
       );
     }
 
-    // Sub Category Filter
+    // SubCategory Filter
     if (subCategory.length > 0) {
       productCopy = productCopy.filter((item) =>
         subCategory.includes(item.subCategory)
@@ -57,52 +69,48 @@ function Collections() {
     // Sorting
     if (sortType === "priceLowToHigh") {
       productCopy.sort((a, b) => a.price - b.price);
-    }
-
-    if (sortType === "priceHighToLow") {
+    } else if (sortType === "priceHighToLow") {
       productCopy.sort((a, b) => b.price - a.price);
     }
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFilteredProduct(productCopy);
-  }, [products, category, subCategory, sortType]);
+  }, [
+    products,
+    category,
+    subCategory,
+    sortType,
+    search,
+    showSearch,
+  ]);
 
   return (
-    <div className="md:w-screen lg:w-[20vw] w-[90vw] min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] flex flex-col md:flex-row pt-[70px] overflow-x-hidden">
+    <div className="flex flex-col md:flex-row min-h-screen pt-20">
 
-      {/* Filter Section */}
-
-      <div
-        className={`md:w-[30vw] lg:w-[20vw] w-full md:min-h-screen ${
-          showFilter ? "h-[45vh]" : "h-screen"
-        } p-5 border-r border-gray-400 text-[#aaf5fa] lg:fixed flex flex-col items-center`}
-      >
-        <p
-          className="text-[25px] font-semibold flex items-center gap-2 cursor-pointer"
-          onClick={() => setShowFilter(!showFilter)}
-        >
-          FILTERS
-
-          {!showFilter && (
-            <FaAngleRight className="md:hidden text-lg" />
-          )}
-
-          {showFilter && (
-            <FaAngleDown className="md:hidden text-lg" />
-          )}
-        </p>
-
-        {/* Categories */}
+      {/* Sidebar */}
+      <div className="w-full md:w-64 border-r p-5">
 
         <div
-          className={`border-2 border-gray-300 rounded-md bg-slate-600 p-5 mt-6 ${
-            showFilter ? "" : "hidden"
+          className="flex items-center gap-2 cursor-pointer md:cursor-default"
+          onClick={() => setShowFilter(!showFilter)}
+        >
+          <h2 className="text-xl font-bold">FILTERS</h2>
+
+          {showFilter ? (
+            <FaAngleDown className="md:hidden" />
+          ) : (
+            <FaAngleRight className="md:hidden" />
+          )}
+        </div>
+
+        {/* Category */}
+        <div
+          className={`mt-6 ${
+            showFilter ? "block" : "hidden"
           } md:block`}
         >
-          <p className="text-lg font-semibold mb-4">CATEGORIES</p>
+          <h3 className="font-semibold mb-3">Categories</h3>
 
-          <div className="space-y-3">
-
+          <div className="space-y-2">
             <label className="flex gap-2">
               <input
                 type="checkbox"
@@ -129,23 +137,18 @@ function Collections() {
               />
               Kids
             </label>
-
           </div>
         </div>
 
-        {/* Sub Categories */}
-
+        {/* SubCategory */}
         <div
-          className={`border-2 border-gray-300 rounded-md bg-slate-600 p-5 mt-6 ${
-            showFilter ? "" : "hidden"
+          className={`mt-8 ${
+            showFilter ? "block" : "hidden"
           } md:block`}
         >
-          <p className="text-lg font-semibold mb-4">
-            SUB-CATEGORIES
-          </p>
+          <h3 className="font-semibold mb-3">Sub Categories</h3>
 
-          <div className="space-y-3">
-
+          <div className="space-y-2">
             <label className="flex gap-2">
               <input
                 type="checkbox"
@@ -172,44 +175,32 @@ function Collections() {
               />
               WinterWear
             </label>
-
           </div>
         </div>
       </div>
 
-      {/* Product Section */}
+      {/* Products */}
+      <div className="flex-1 p-6">
 
-      <div className="lg:pl-[20%] w-full md:w-[70vw] lg:w-[80vw] min-h-screen p-5">
-
-        <div className="flex justify-between items-center flex-wrap gap-4">
-
-          <Title text1="All" text2="COLLECTIONS" />
+        <div className="flex justify-between items-center flex-wrap gap-4 mb-8">
+          <Title text1="ALL" text2="COLLECTIONS" />
 
           <select
-            className="w-[200px] h-[45px] bg-slate-600 text-white rounded-lg border-2 border-transparent hover:border-cyan-400 px-3"
             value={sortType}
             onChange={(e) => setSortType(e.target.value)}
+            className="border rounded px-4 py-2"
           >
-            <option value="relevant">
-              Sort By: Relevant
-            </option>
-
+            <option value="relevant">Sort By: Relevant</option>
             <option value="priceLowToHigh">
               Price: Low to High
             </option>
-
             <option value="priceHighToLow">
               Price: High to Low
             </option>
-
           </select>
-
         </div>
 
-        {/* Products */}
-
-        <div className="mt-8 flex flex-wrap gap-8">
-
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProduct.length > 0 ? (
             filteredProduct.map((item) => (
               <Card
@@ -221,15 +212,13 @@ function Collections() {
               />
             ))
           ) : (
-            <p className="text-white text-xl">
+            <p className="text-gray-500 text-lg">
               No products found.
             </p>
           )}
-
         </div>
 
       </div>
-
     </div>
   );
 }

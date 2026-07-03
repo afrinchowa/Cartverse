@@ -39,13 +39,13 @@ function Contact() {
           </p>
 
           <h2 className="text-4xl font-bold text-gray-800 mb-6">
-            Let’s Start a Conversation
+            Let's Start a Conversation
           </h2>
 
           <p className="text-gray-600 leading-8 mb-10">
             Have questions about our collections, delivery, or services?
-            Our team is always ready to assist you with the best
-            customer experience.
+            Our team is always ready to assist you with the best customer
+            experience.
           </p>
 
           <div className="space-y-6">
@@ -100,7 +100,7 @@ function Contact() {
               </div>
             </div>
 
-            {/* Office Hours */}
+            {/* Working Hours */}
             <div className="flex items-start gap-5 bg-white p-5 rounded-2xl shadow-sm">
               <div className="bg-black text-white p-4 rounded-xl">
                 <Clock size={24} />
@@ -119,7 +119,7 @@ function Contact() {
           </div>
         </div>
 
-        {/* Right Side Form */}
+        {/* Right Side */}
         <div className="bg-white rounded-3xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">
             Send Message
@@ -172,16 +172,16 @@ function Contact() {
               </label>
 
               <textarea
-                rows="5"
+                rows={5}
                 placeholder="Write your message..."
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black resize-none"
-              ></textarea>
+              />
             </div>
 
             {/* Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-800 transition"
+              className="w-full bg-black text-white py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-800 transition duration-300"
             >
               <Send size={20} />
               Send Message
@@ -190,7 +190,7 @@ function Contact() {
         </div>
       </div>
 
-      {/* Map Section */}
+      {/* Google Map */}
       <div className="px-6 pb-20">
         <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-lg">
           <iframe
@@ -198,9 +198,10 @@ function Contact() {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.8972121448115!2d90.37498967594258!3d23.810332986421587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c751b7b5c57d%3A0x7fbb4c6e97ed9866!2sDhaka!5e0!3m2!1sen!2sbd!4v1710000000000!5m2!1sen!2sbd"
             width="100%"
             height="450"
-            allowFullScreen=""
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
-            className="border-0"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>
