@@ -1,21 +1,36 @@
-import express from 'express'
-import upload from '../middleware/multer'
+import express from "express";
+import upload from "../middleware/multer.js";
 import adminAuth from "../middleware/adminAuth.js";
- const productRoutes = express.Router()
 
- productRoutes.get('/', (req, res) => {
-    res.send("Get Products")
- })
+import {
+  addProduct,
+  getProducts,
+  listProduct,
+  removeProduct,
+} from "../controllers/productController.js";
 
-productRoutes.post('/addproduct', upload.fields([
-   {name:"image1", maxCount:1},
-    {name:"image2", maxCount:1},
-     {name:"image3", maxCount:1},
-      {name:"image4", maxCount:1}]), addProduct)
+const productRoutes = express.Router();
 
-productRoutes.get('/getproducts', getProducts)
+productRoutes.get("/", (req, res) => {
+  res.send("Get Products");
+});
 
-productRoutes.get('/list', listProduct)  
-productRoutes.post('/remove/:id', adminAuth , removeProduct)
+productRoutes.post(
+  "/addproduct",
+  adminAuth,
+  upload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
+  ]),
+  addProduct
+);
 
-export default productRoutes
+productRoutes.get("/getproducts", getProducts);
+
+productRoutes.get("/list", listProduct);
+
+productRoutes.post("/remove/:id", adminAuth, removeProduct);
+
+export default productRoutes;

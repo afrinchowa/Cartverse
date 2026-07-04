@@ -4,7 +4,7 @@ import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
 import Card from "../component/Card";
 import Title from "../component/Title";
-import { shopDataContext } from "../Context/ShopContext";
+import { shopDataContext } from "../context/ShopContext";
 
 function Collections() {
   const [showFilter, setShowFilter] = useState(false);

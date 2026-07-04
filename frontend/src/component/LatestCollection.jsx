@@ -4,7 +4,7 @@ import Card from './Card'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
-import { shopDataContext } from '../context/shopDataContext'
+import { shopDataContext } from '../context/ShopContext'
 function LatestCollection() {
   let {products} = useContext(shopDataContext)
   let [latestProducts, setLatestProducts] = useState([])

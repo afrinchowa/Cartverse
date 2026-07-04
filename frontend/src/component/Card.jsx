@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { shopDataContext } from "../context/shopDataContext";
+import { shopDataContext } from "../context/ShopContext";
 // eslint-disable-next-line no-unused-vars
 function Card({ name, image, id, price }) {
   let { currency } = useContext(shopDataContext);

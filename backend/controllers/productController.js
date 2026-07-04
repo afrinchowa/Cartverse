@@ -1,4 +1,5 @@
-import Product from "../model/productModel";
+import Product from "../model/productModel.js";
+import uploadOnCloudinary from "../config/cloudinary.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -11,60 +12,101 @@ export const addProduct = async (req, res) => {
       sizes,
       bestSeller,
     } = req.body;
-    let image1 = await uploadOnCloudinary(req.files.image1[0].path);
-    let image2 = await uploadOnCloudinary(req.files.image2[0].path);
-    let image3 = await uploadOnCloudinary(req.files.image3[0].path);
-    let image4 = await uploadOnCloudinary(req.files.image4[0].path);
+
+    const image1 = req.files?.image1
+      ? await uploadOnCloudinary(req.files.image1[0].path)
+      : "";
+
+    const image2 = req.files?.image2
+      ? await uploadOnCloudinary(req.files.image2[0].path)
+      : "";
+
+    const image3 = req.files?.image3
+      ? await uploadOnCloudinary(req.files.image3[0].path)
+      : "";
+
+    const image4 = req.files?.image4
+      ? await uploadOnCloudinary(req.files.image4[0].path)
+      : "";
+
     const productData = {
       name,
       description,
-      price:Number(price),
+      price: Number(price),
       category,
       subCategory,
-      sizes:JSON.parse(sizes),
-      bestSeller :bestSeller==="true"?true:false,
+      sizes: JSON.parse(sizes),
+      bestSeller: bestSeller === "true",
       date: Date.now(),
       image1,
       image2,
       image3,
       image4,
     };
-   const product= await Product.create(productData);
-   return res.status(201).json({ message: "Product added successfully", product });
+
+    const product = await Product.create(productData);
+
+    return res.status(201).json({
+      message: "Product added successfully",
+      product,
+    });
   } catch (error) {
-    console.log("Add Product Error")
-    return res.status(500).json({ message: `Add Product error ${error}` });
+    console.error("Add Product Error:", error);
+    return res.status(500).json({
+      message: "Add Product Error",
+      error: error.message,
+    });
   }
 };
 
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.status(200).json(products);
+
+    return res.status(200).json(products);
   } catch (error) {
-    console.log("Get Products Error")
-    return res.status(500).json({ message: `Get Products error ${error}` });
+    console.error("Get Products Error:", error);
+    return res.status(500).json({
+      message: "Get Products Error",
+      error: error.message,
+    });
   }
 };
 
-export const listProduct = async (req,res) =>{
-  try{
-    const product = await Product.find({});
-    return res.status(200).json(product)
-  }catch(error){
-    console.log("List Product Error")
-    return res.status(500).json({ message: `List Product error ${error}` });
+export const listProduct = async (req, res) => {
+  try {
+    const products = await Product.find({});
+
+    return res.status(200).json(products);
+  } catch (error) {
+    console.error("List Product Error:", error);
+    return res.status(500).json({
+      message: "List Product Error",
+      error: error.message,
+    });
   }
-}
-export const removeProduct = async (req,res) =>{
-  try{
-    const {id} = req.params;
+};
+
+export const removeProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
     const product = await Product.findByIdAndDelete(id);
-    return res.status(200).json({message:"Product removed successfully", product})
-  }catch(error){
-    console.log("Remove Product Error")
-    return res.status(500).json({ message: `Remove Product error ${error}` });
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Product removed successfully",
+    });
+  } catch (error) {
+    console.error("Remove Product Error:", error);
+    return res.status(500).json({
+      message: "Remove Product Error",
+      error: error.message,
+    });
   }
-}
-
-
+};

@@ -5,16 +5,18 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import AuthContext from "./context/AuthContext.jsx";
 import UserContext from "./context/UserContext.jsx";
-import ShopContext from "./context/ShopContext.jsx";
+import ShopDataContext from "./context/ShopContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <AuthContext>
-      <UserContext>
-        <ShopContext>
-          <App />
-        </ShopContext>
-      </UserContext>
-    </AuthContext>
-  </BrowserRouter>,
+  <StrictMode>
+    <BrowserRouter>
+      <AuthContext>
+        <UserContext>
+          <ShopDataContext>
+            <App />
+          </ShopDataContext>
+        </UserContext>
+      </AuthContext>
+    </BrowserRouter>
+  </StrictMode>
 );
