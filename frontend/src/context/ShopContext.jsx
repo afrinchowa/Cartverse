@@ -38,19 +38,12 @@ function ShopContext({ children }) {
     delivery_fee,
     getProducts,
   };
-  const value = {
-    products,
-    setProducts,
-    search,
-    setSearch,
-    showSearch,
-    setShowSearch,
-    currency,
-    delivery_fee,
-    getProducts,
-  };
+
 
   return (
+    <shopDataContext.Provider value={value}>
+      {children}
+    </shopDataContext.Provider>
     <shopDataContext.Provider value={value}>
       {children}
     </shopDataContext.Provider>
