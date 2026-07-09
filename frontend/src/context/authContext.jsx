@@ -26,6 +26,13 @@ const AuthContext = ({ children }) => {
     login,
     logout,
   };
+  const value = {
+    serverUrl,
+    isAuthenticated,
+    user,
+    login,
+    logout,
+  };
 
   return (
     <authDataContext.Provider value={value}>
