@@ -25,6 +25,11 @@ function UserContext({ children }) {
         Authorization: `Bearer ${token}`,
       },
     });
+    const result = await axios.get(`${serverUrl}/api/user/current`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     setUserData(result.data);
   } catch (error) {
