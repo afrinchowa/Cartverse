@@ -32,9 +32,7 @@ const AuthContext = ({ children }) => {
     <authDataContext.Provider value={value}>
       {children}
     </authDataContext.Provider>
-    <authDataContext.Provider value={value}>
-      {children}
-    </authDataContext.Provider>
+   
   );
 };
 
