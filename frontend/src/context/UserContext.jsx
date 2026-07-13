@@ -25,11 +25,7 @@ function UserContext({ children }) {
         Authorization: `Bearer ${token}`,
       },
     });
-    const result = await axios.get(`${serverUrl}/api/user/current`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+
 
     setUserData(result.data);
   } catch (error) {
@@ -47,13 +43,12 @@ function UserContext({ children }) {
     setUserData,
     getCurrentUser,
   };
-  const value = {
-    userData,
-    setUserData,
-    getCurrentUser,
-  };
+
 
   return (
+    <userDataContext.Provider value={value}>
+      {children}
+    </userDataContext.Provider>
     <userDataContext.Provider value={value}>
       {children}
     </userDataContext.Provider>
