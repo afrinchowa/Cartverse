@@ -37,10 +37,13 @@ function UserContext({ children }) {
   useEffect(() => {
     getCurrentUser();
   }, []);
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
+ 
 
+  const value = {
+    userData,
+    setUserData,
+    getCurrentUser,
+  };
   const value = {
     userData,
     setUserData,
