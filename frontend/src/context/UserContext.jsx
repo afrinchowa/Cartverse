@@ -44,11 +44,7 @@ function UserContext({ children }) {
     setUserData,
     getCurrentUser,
   };
-  const value = {
-    userData,
-    setUserData,
-    getCurrentUser,
-  };
+
 
 
 

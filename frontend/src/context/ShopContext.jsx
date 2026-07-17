@@ -21,6 +21,12 @@ function ShopContext({ children }) {
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+    try {
+      const result = await axios.get(`${serverUrl}/api/product/list`);
+      setProducts(result.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
 
   };
 
