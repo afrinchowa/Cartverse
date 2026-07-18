@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { authDataContext } from "./AuthContext";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const shopDataContext = createContext();
 
 function ShopContext({ children }) {
@@ -16,18 +17,12 @@ function ShopContext({ children }) {
 
   const getProducts = async () => {
     try {
-      const result = await axios.get(`${serverUrl}/api/product/list`);
+      const result = await axios.get(serverUrl+"/api/product/list");
+      console.log(result.data);
       setProducts(result.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-    try {
-      const result = await axios.get(`${serverUrl}/api/product/list`);
-      setProducts(result.data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-
   };
 
   useEffect(() => {
