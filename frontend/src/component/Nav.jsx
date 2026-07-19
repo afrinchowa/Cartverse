@@ -11,15 +11,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { HiOutlineCollection } from "react-icons/hi";
 import { MdContactEmergency } from "react-icons/md";
-const Nav = () => {
+function Nav()  {
   const { getCurrentUser, userData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
-  const navigate = useNavigate();
-
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch,search,setSearch] = useContext(shopDataContext);
   const [showProfile, setShowProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+const navigate = useNavigate();
+  const menuItems = [
+    { label: "Home", path: "/" },
+    { label: "Collections", path: "/collections" },
+    { label: "About", path: "/about" },
+    { label: "Contact", path: "/contact" },
+  ];
   const menuItems = [
     { label: "Home", path: "/" },
     { label: "Collections", path: "/collections" },
