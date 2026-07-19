@@ -24,14 +24,14 @@ const navigate = useNavigate();
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
   ];
-  const menuItems = [
-    { label: "Home", path: "/" },
-    { label: "Collections", path: "/collections" },
-    { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact" },
-  ];
+
 
   /* ---------------- Helpers ---------------- */
+  const closeAll = () => {
+    setShowSearch(false);
+    setShowProfile(false);
+    setMobileMenuOpen(false);
+  };
   const closeAll = () => {
     setShowSearch(false);
     setShowProfile(false);
