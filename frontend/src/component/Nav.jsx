@@ -14,7 +14,8 @@ import { MdContactEmergency } from "react-icons/md";
 function Nav()  {
   const { getCurrentUser, userData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
-  const [showSearch, setShowSearch,search,setSearch] = useContext(shopDataContext);
+  const [showSearch, setShowSearch,search,setSearch] = useContext(shopDataContext
+  );
   const [showProfile, setShowProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 const navigate = useNavigate();
@@ -32,11 +33,7 @@ const navigate = useNavigate();
     setShowProfile(false);
     setMobileMenuOpen(false);
   };
-  const closeAll = () => {
-    setShowSearch(false);
-    setShowProfile(false);
-    setMobileMenuOpen(false);
-  };
+
 
   const handleNavigate = (path) => {
     navigate(path);
@@ -88,10 +85,10 @@ const navigate = useNavigate();
         {/* Icons */}
         <div className="flex items-center gap-4 text-[22px] relative">
           {/* Search */}
-          {showSearch ? (
+          {!showSearch ? (
             <IoSearchCircleSharp
               className="cursor-pointer"
-              onClick={() => setShowSearch(false)}
+              onClick={() => {;navigate("/collections"); setShowSearch(true); setShowProfile(false);}}
             />
           ) : (
             <IoSearchCircleOutline
@@ -203,7 +200,7 @@ const navigate = useNavigate();
           <input
             type="text"
             placeholder="Search products..."
-            className="w-[90%] md:w-[55%] mx-auto block h-[50px] px-6 rounded-full outline-none"
+            className="w-[90%] md:w-[55%] mx-auto block h-[50px] px-6 rounded-full outline-none " onchange={(e)=>setSearch(e.target.value)} value={search}
           />
         </div>
       )}
