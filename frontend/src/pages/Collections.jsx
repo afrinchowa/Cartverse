@@ -31,13 +31,21 @@ const { products, search, showSearch } = useContext(shopDataContext);
 
 const applyFilter = () => {
     let productCopy = products.slice();
+if(showSearch && search){
+  productCopy = productCopy.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
+}
+
     if(category.length > 0 )
     {
       productCopy = productCopy.filter((item) => category.includes(item.category));
     }
 
-
-
+if(subCategory.length > 0 )
+    {
+      productCopy = productCopy.filter((item) => subCategory.includes(item.subCategory));
+    }
 
   // SubCategory Filter
   const toggleSubCategory = (e) => {
