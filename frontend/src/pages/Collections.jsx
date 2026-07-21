@@ -35,11 +35,13 @@ if(showSearch && search){
   productCopy = productCopy.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase()),
   );
-  productCopy = productCopy.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase()),
-  );
+
 }
 
+    if(category.length > 0 )
+    {
+      productCopy = productCopy.filter((item) => category.includes(item.category));
+    }
     if(category.length > 0 )
     {
       productCopy = productCopy.filter((item) => category.includes(item.category));
