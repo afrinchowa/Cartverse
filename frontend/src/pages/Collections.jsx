@@ -35,6 +35,9 @@ if(showSearch && search){
   productCopy = productCopy.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase()),
   );
+  productCopy = productCopy.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
 }
 
     if(category.length > 0 )
