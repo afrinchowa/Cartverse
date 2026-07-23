@@ -42,11 +42,12 @@ if(showSearch && search){
     {
       productCopy = productCopy.filter((item) => category.includes(item.category));
     }
-    if(category.length > 0 )
-    {
-      productCopy = productCopy.filter((item) => category.includes(item.category));
-    }
+  
 
+if(subCategory.length > 0 )
+    {
+      productCopy = productCopy.filter((item) => subCategory.includes(item.subCategory));
+    }
 if(subCategory.length > 0 )
     {
       productCopy = productCopy.filter((item) => subCategory.includes(item.subCategory));
