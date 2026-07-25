@@ -33,9 +33,7 @@ const applyFilter = () => {
     let productCopy = products.slice();
 if(showSearch && search){
   productCopy = productCopy.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase()),
-  );
-
+    item.name.toLowerCase().includes(search.toLowerCase()));
 }
 
     if(category.length > 0 )
@@ -44,25 +42,29 @@ if(showSearch && search){
     }
   
 
+
 if(subCategory.length > 0 )
     {
       productCopy = productCopy.filter((item) => subCategory.includes(item.subCategory));
     }
-if(subCategory.length > 0 )
-    {
-      productCopy = productCopy.filter((item) => subCategory.includes(item.subCategory));
-    }
+setFilteredProduct(productCopy);
+  }
 
-  // SubCategory Filter
-  const toggleSubCategory = (e) => {
-    const value = e.target.value;
+  const sortProducts=(e)=>{
+let fbCopy =filterProduct.slice()
+switch(sortType){
+  case 'low-high':
+    setFilterProduct(fbCopy.sort((a,b)=>a.price-b.price))
+    break;
+  case 'high-low':
+    setFilterProduct(fbCopy.sort((a,b)=>b.price-a.price))
+    break;
+  default:
+    applyFilter()
+    break;
+}
+  }
 
-    setSubCategory((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value],
-    );
-  };
 
   useEffect(() => {
     let productCopy = [...products];
