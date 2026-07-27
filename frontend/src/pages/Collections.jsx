@@ -67,27 +67,14 @@ function Collections() {
   };
 
   useEffect(() => {
-    let productCopy = [...products];
-
-    // Search Filter
-    if (showSearch && search.trim() !== "") {
-      productCopy = productCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
-    }
-
- useEffect(() =>{
-  sortProducts()
- },[sortType])
-
- useEffect(() => {
-   setFilterProduct(products);
-  }, [products]);
-
- useEffect(() => {
-   applyFilter();
-  }, [products, category, subCategory, search, showSearch]);
-
+    sortProducts();
+  }, [sortType]);
+ useEffect(()=> {
+  setFilteredProduct(products)
+ })
+useEffect(() => {
+    applyFilter();
+  }, [category, subCategory, search, showSearch]);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen pt-20">
