@@ -75,9 +75,7 @@ function Collections() {
 useEffect(() => {
     applyFilter();
   }, [category, subCategory, search, showSearch]);
-useEffect(() => {
-    applyFilter();
-  }, [category, subCategory, search, showSearch]);
+
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen pt-20">
