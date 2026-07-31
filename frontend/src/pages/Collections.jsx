@@ -6,7 +6,7 @@ import { shopDataContext } from "../context/ShopContext";
 
 function Collections() {
   const [showFilter, setShowFilter] = useState(false);
-  const { products, search, showSearch } = useContext(shopDataContext);
+  // const { products, search, showSearch } = useContext(shopDataContext);
   const {
     products = [],
     search = "",
@@ -15,7 +15,7 @@ function Collections() {
 
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
+  // const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
   // Category Filter

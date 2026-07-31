@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -10,10 +10,10 @@ import Contact from "./pages/Contact";
 
 import Nav from "./component/Nav";
 
-import UserContext from "./context/UserContext";
+import { userDataContext } from "./context/UserContext.jsx";
 
 function App() {
-  const { userData } = React.useContext(UserContext);
+  const { userData } = React.useContext(userDataContext);
   const location = useLocation();
 
   return (
