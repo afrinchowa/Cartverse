@@ -9,8 +9,8 @@ function OurPolicy() {
  Customer friendly policies - Committed to Your Satisfaction and Safety.
 </p>
 </div>
-<div>
-  <div>
+<div className='w-[100%] md:w-[70%] h-[60%] flex flex-col md:flex-row items-center justify-center gap-[20px] md:gap-[50px]'>
+  <div className='w-[90%] md:w-[50%] h-[100%] flex flex-col items-center justify-center gap-[20px]'>
     
   </div>
 </div>
