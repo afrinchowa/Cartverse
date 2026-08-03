@@ -14,6 +14,8 @@ function OurPolicy() {
     <RiExchangeFundsFill className='md:w-[60px] w-[30px] md:h-[60px] text-[#90b9ff' />
     <p className='font-semibold md:text-25px text-19px text-[#a5e8f7] text-center'>Exchange policy</p>
     <p className='font-semibold md:text-18px text-12px text-[aliceblue] text-center'>Exchange Made Easy - Quick,simple , and Customer-Friendly process</p>
+    <p className='font-semibold md:text-18px text-12px text-[aliceblue] text-center'>Exchange Made Easy - Quick,simple , and Customer-Friendly process</p>
+
   </div>
 </div>
     </div>
