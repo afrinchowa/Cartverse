@@ -1,17 +1,8 @@
 import jwt from "jsonwebtoken";
-
-/**
- * Authentication Middleware
- * -------------------------
- * This middleware verifies the JWT token stored in cookies.
- * If the token is valid, it attaches user information to the request object.
- * Otherwise, it blocks access with an unauthorized response.
- */
-
 const isAuth = (req, res, next) => {
   try {
     // Retrieve token from cookies
-    const token = req.cookies?.token;
+    const token = req.cookies;
 
     // Check if token exists
     if (!token) {
@@ -22,15 +13,21 @@ const isAuth = (req, res, next) => {
     }
 
     // Verify token using secret key
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
 
+    if(!verifyToken) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid or expired authentication token.",
+      });
+    }
     // Attach user data to request object
     req.user = {
-      id: decoded.userId,
+      id: verifyToken.userId,
     };
 
     // Attach admin email if available
-    req.adminEmail = decoded.email || null;
+    req.adminEmail = verifyToken.email || null;
 
     // Proceed to the next middleware/controller
     next();
