@@ -22,9 +22,7 @@ const isAuth = (req, res, next) => {
       });
     }
     // Attach user data to request object
-    req.user = {
-      id: verifyToken.userId,
-    };
+   req.userId = verifyToken.userId
 
     // Attach admin email if available
     req.adminEmail = verifyToken.email || null;
