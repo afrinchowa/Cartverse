@@ -11,23 +11,16 @@ const isAuth = (req, res, next) => {
         message: "Access denied. Authentication token not found.",
       });
     }
-
-    // Verify token using secret key
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    if(!verifyToken) {
+    if (!verifyToken) {
       return res.status(401).json({
         success: false,
         message: "Invalid or expired authentication token.",
       });
-    }
-    // Attach user data to request object
-   req.userId = verifyToken.userId
-
-    // Attach admin email if available
-    req.adminEmail = verifyToken.email || null;
-
-    // Proceed to the next middleware/controller
+    }  
+    req.userId = verifyToken.userId;
+    // req.adminEmail = verifyToken.email || null;
     next();
   } catch (error) {
     return res.status(401).json({
