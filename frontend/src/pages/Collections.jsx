@@ -20,14 +20,13 @@ function Collections() {
 
   // Category Filter
   const toggleCategory = (e) => {
-    const value = e.target.value;
+    if(category.includes(e.target.value)) {
+setCategory(prev =>prev.filter(item =>item !==e.target.value))
+    }else{
+      setCategory(prev => [...prev, e.target.value])
+    }
 
-    setCategory((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value],
-    );
-  };
+
 
   const applyFilter = () => {
     let productCopy = products.slice();
