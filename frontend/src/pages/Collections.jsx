@@ -20,13 +20,19 @@ function Collections() {
 
   // Category Filter
   const toggleCategory = (e) => {
-    if(category.includes(e.target.value)) {
-setCategory(prev =>prev.filter(item =>item !==e.target.value))
-    }else{
-      setCategory(prev => [...prev, e.target.value])
+    if (category.includes(e.target.value)) {
+      setCategory((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setCategory((prev) => [...prev, e.target.value]);
     }
-
-
+  };
+  const toggleSubCategory = (e) => {
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setSubCategory((prev) => [...prev, e.target.value]);
+    }
+  };
 
   const applyFilter = () => {
     let productCopy = products.slice();
@@ -68,13 +74,12 @@ setCategory(prev =>prev.filter(item =>item !==e.target.value))
   useEffect(() => {
     sortProducts();
   }, [sortType]);
- useEffect(()=> {
-  setFilteredProduct(products)
- })
-useEffect(() => {
+  useEffect(() => {
+    setFilteredProduct(products);
+  });
+  useEffect(() => {
     applyFilter();
   }, [category, subCategory, search, showSearch]);
-
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen pt-20">
