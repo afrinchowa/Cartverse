@@ -41,6 +41,13 @@ function Collections() {
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
+  const applyFilter = () => {
+    let productCopy = products.slice();
+    if (showSearch && search) {
+      productCopy = productCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
 
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
