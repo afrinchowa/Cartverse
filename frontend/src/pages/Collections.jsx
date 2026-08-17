@@ -33,6 +33,13 @@ function Collections() {
       setSubCategory((prev) => [...prev, e.target.value]);
     }
   };
+  const toggleSubCategory = (e) => {
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setSubCategory((prev) => [...prev, e.target.value]);
+    }
+  };
 
   const applyFilter = () => {
     let productCopy = products.slice();
