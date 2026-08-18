@@ -33,13 +33,7 @@ function Collections() {
       setSubCategory((prev) => [...prev, e.target.value]);
     }
   };
-  const toggleSubCategory = (e) => {
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setSubCategory((prev) => [...prev, e.target.value]);
-    }
-  };
+
 
   const applyFilter = () => {
     let productCopy = products.slice();
@@ -48,14 +42,13 @@ function Collections() {
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
-  const applyFilter = () => {
-    let productCopy = products.slice();
-    if (showSearch && search) {
+
+
+    if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
+        category.includes(item.category),
       );
     }
-
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
         category.includes(item.category),
