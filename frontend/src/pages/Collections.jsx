@@ -49,12 +49,15 @@ function Collections() {
         category.includes(item.category),
       );
     }
-    if (category.length > 0) {
+  
+
+    if (subCategory.length > 0) {
       productCopy = productCopy.filter((item) =>
-        category.includes(item.category),
+        subCategory.includes(item.subCategory),
       );
     }
-
+    setFilteredProduct(productCopy);
+  };
     if (subCategory.length > 0) {
       productCopy = productCopy.filter((item) =>
         subCategory.includes(item.subCategory),
