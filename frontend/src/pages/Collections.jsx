@@ -58,14 +58,22 @@ function Collections() {
     }
     setFilteredProduct(productCopy);
   };
-    if (subCategory.length > 0) {
-      productCopy = productCopy.filter((item) =>
-        subCategory.includes(item.subCategory),
-      );
-    }
-    setFilteredProduct(productCopy);
-  };
 
+
+  const sortProducts = (e) => {
+    let fbCopy = filterProduct.slice();
+    switch (sortType) {
+      case "low-high":
+        setFilterProduct(fbCopy.sort((a, b) => a.price - b.price));
+        break;
+      case "high-low":
+        setFilterProduct(fbCopy.sort((a, b) => b.price - a.price));
+        break;
+      default:
+        applyFilter();
+        break;
+    }
+  };
   const sortProducts = (e) => {
     let fbCopy = filterProduct.slice();
     switch (sortType) {
